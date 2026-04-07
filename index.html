@@ -12,10 +12,9 @@
     --main-brown: #92736C;
     --dark-brown: #634a44;
     --white: #FFFFFF;
-    /* โทนสีละมุนใหม่ */
-    --soft-pink-polka: #FFEDF1; /* สีชมพูอ่อนลายจุด */
     --accent-pink: #FCE4EC;
-    --window-bg: rgba(255, 255, 255, 0.7); 
+    --polka-dot: #FFEDF1;
+    --window-bg: rgba(255, 255, 255, 0.75); 
     --card-shadow: 0 10px 30px rgba(146, 115, 108, 0.06);
 }
 
@@ -23,8 +22,8 @@
 
 body {
     background-color: var(--bg-light);
-    /* พื้นหลังหลักเป็นลายจุดอ่อนๆ */
-    background-image: radial-gradient(#FFEDF1 1.5px, transparent 1.5px);
+    /* เพิ่มลายจุดชมพูอ่อนที่พื้นหลังหลัก */
+    background-image: radial-gradient(var(--polka-dot) 1.5px, transparent 1.5px);
     background-size: 25px 25px;
     display: flex;
     justify-content: center;
@@ -34,17 +33,17 @@ body {
 }
 
 .browser-window {
-    width: 850px;
+    width: 800px;
     aspect-ratio: 1 / 1;
     background: 
-        linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
-        url('image.png'); /* เปลี่ยนเป็นชื่อไฟล์ลายสก็อตจางของคุณ */
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+        url('image.png'); /* ไฟล์ลายสก็อตของคุณ */
     background-size: cover;
     background-position: center;
-    backdrop-filter: blur(12px);
-    border-radius: 35px;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
     border: 2px solid var(--white);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.06);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -53,29 +52,30 @@ body {
 
 .browser-header {
     background: rgba(255,255,255,0.9);
-    padding: 18px 25px;
+    padding: 15px 25px;
     display: flex;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid rgba(146, 115, 108, 0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.03);
 }
 .dot { width: 10px; height: 10px; background: var(--accent-pink); border-radius: 50%; }
+
 .address-bar {
     flex: 1;
     background: #fff;
     border-radius: 20px;
     padding: 6px 15px;
-    font-size: 13px;
-    color: var(--main-brown);
+    font-size: 12px;
+    color: #B8A39E;
     text-align: center;
-    border: 1px solid rgba(146, 115, 108, 0.05);
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    padding: 40px;
+    gap: 20px;
+    padding: 30px;
     flex: 1;
     overflow: hidden;
 }
@@ -84,66 +84,63 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
-/* สไตล์ชื่อร้าน Lityhao ตัวใหญ่ สไตล์ Vintage/Retro */
+/* ชื่อร้าน Lityhao ตัวใหญ่ */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
-    font-size: 65px;
+    font-size: 60px;
     color: var(--main-brown);
     text-align: center;
-    margin-bottom: -15px; 
-    text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(146, 115, 108, 0.08);
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(146, 115, 108, 0.1);
 }
 
-/* สไตล์ดาวตกแต่งที่ห้อยลงมาตามรูป */
-.deco-elements {
+/* ส่วนตกแต่งดาวห้อยลงมา */
+.deco-stars {
     width: 100%;
+    height: 30px;
     display: flex;
     justify-content: center;
-    position: relative;
-    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
-/* ปรับที่ใส่รูปให้ใหญ่ขึ้นเล็กน้อย ขอบมน */
 .image-stack {
     position: relative;
     width: 100%;
-    height: 75%; 
-    margin-top: 20px;
+    height: 65%;
 }
 
 .img-box {
     position: absolute;
     background: #fff;
-    padding: 15px;
-    border-radius: 25px;
+    padding: 12px;
+    border-radius: 20px;
     box-shadow: var(--card-shadow);
     overflow: hidden;
 }
 
 .img-1 {
-    width: 250px; height: 340px; 
-    transform: rotate(-7deg);
-    top: 5%; left: 0; 
+    width: 200px; height: 260px;
+    transform: rotate(-8deg);
+    top: 5%; left: 5%;
     z-index: 1;
 }
 
 .img-2 {
-    width: 250px; height: 320px; 
-    transform: rotate(5deg);
-    bottom: 5%; right: 0; 
+    width: 200px; height: 240px;
+    transform: rotate(6deg);
+    bottom: 5%; right: 5%;
     z-index: 2;
-    border: 1px solid var(--accent-pink);
 }
 
 .img-box img {
     width: 100%; height: 100%;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 12px;
 }
 
 .right-column {
@@ -151,81 +148,74 @@ body {
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
-    padding-right: 8px;
+    padding-right: 5px;
 }
 
-.right-column::-webkit-scrollbar { width: 5px; }
+.right-column::-webkit-scrollbar { width: 4px; }
 .right-column::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
 
-/* ปรับ Info Card ให้เป็นสีชมพูลายจุดอ่อนๆ */
+/* Info Card เพิ่มลายจุดด้านในเพื่อให้ละมุนขึ้น */
 .info-card {
     background: rgba(255, 255, 255, 0.95);
-    background-image: radial-gradient(#FFEDF1 1.5px, transparent 1.5px);
-    background-size: 20px 20px;
-    border-radius: 25px;
-    padding: 25px;
+    background-image: radial-gradient(var(--polka-dot) 1px, transparent 1px);
+    background-size: 15px 15px;
+    border-radius: 20px;
+    padding: 20px;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
-h1 { color: var(--main-brown); font-size: 24px; margin-bottom: 5px; font-family: 'Pacifico', cursive; } 
-.desc { font-size: 13px; color: var(--dark-brown); margin-bottom: 12px; }
+h1 { color: var(--dark-brown); font-size: 22px; margin-bottom: 5px; font-family: 'Pacifico', cursive; }
+.desc { font-size: 12px; color: var(--main-brown); margin-bottom: 10px; }
 
 .section-title {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--dark-brown);
     font-weight: 500;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-.section-title::after {
-    content: "";
-    flex: 1; height: 1px; background: var(--accent-pink);
+    gap: 8px;
+    border-left: 3px solid var(--main-brown);
+    padding-left: 10px;
 }
 
-.step-item {
+.item {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    font-size: 14px;
+    padding: 8px 0;
+    font-size: 13px;
     color: var(--dark-brown);
     border-bottom: 1px dashed var(--accent-pink);
 }
 
-/* คำโปรยด้านล่าง Card */
-.creative-tagline {
+/* คำโปรยด้านล่างที่เกี่ยวกับงานดีไซน์ */
+.footer-tagline {
+    text-align: center;
     font-size: 12px;
     color: var(--main-brown);
-    text-align: center;
-    margin-top: 15px;
-    line-height: 1.6;
+    margin-top: 10px;
     font-style: italic;
-    letter-spacing: 0.5px;
+    line-height: 1.5;
 }
 
 .btn {
     display: block;
     text-align: center;
-    padding: 12px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 15px;
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     transition: 0.3s;
 }
-.btn-main { background: var(--main-brown); color: #fff; margin-top: 10px; }
+.btn-main { background: var(--main-brown); color: #fff; margin-top: 5px; }
 .btn-outline { border: 1.5px dashed var(--main-brown); color: var(--main-brown); background: rgba(255,255,255,0.8); }
 
-.sticker { position: absolute; pointer-events: none; z-index: 10; }
-
-@media (max-width: 850px) {
+@media (max-width: 768px) {
     .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
-    .left-column { min-height: 450px; }
-    .img-1, .img-2 { width: 200px; height: 280px; }
-    .shop-title-large { font-size: 45px; margin-bottom: 0; }
+    .shop-title-large { font-size: 45px; }
 }
 </style>
 </head>
@@ -234,60 +224,59 @@ h1 { color: var(--main-brown); font-size: 24px; margin-bottom: 5px; font-family:
 <div class="browser-window">
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        <div class="address-bar">www.lityhao-vibes.here</div> <div style="font-size: 11px; color: var(--main-brown); font-weight: 500;">EXIT</div>
+        <div class="address-bar">lityhao.design/home</div>
+        <div style="font-size: 11px; color: #999; font-weight: 500;">EXIT</div>
     </div>
 
     <div class="main-content">
         <div class="left-column">
             <h1 class="shop-title-large">Lityhao</h1>
             
-            <div class="deco-elements">
-                <img src="path_to_star_deco.png" alt="Star Deco" style="max-width: 300px;">
-                <img src="https://cdn-icons-png.flaticon.com/512/594/594846.png" class="sticker" style="top: -15px; left: 10%; width: 50px;">
+            <div class="deco-stars">
+                <span style="color: var(--main-brown); font-size: 20px;">★ ☆ ★</span>
             </div>
-
+            
             <div class="image-stack">
                 <div class="img-box img-1">
-                    <img src="logo.jpg" alt="Work Sample 1">
+                    <img src="logo.jpg" alt="Work 1">
                 </div>
                 <div class="img-box img-2">
-                    <img src="logo.jpg" alt="Work Sample 2">
+                    <img src="logo.jpg" alt="Work 2">
                 </div>
             </div>
-            <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="sticker" style="bottom: 10%; right: 10%; width: 50px; transform: rotate(15deg);">
         </div>
 
         <div class="right-column">
             <div class="info-card">
                 <h1>Lityhao 🎀</h1>
-                <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า เค้าใจดีมากค่ะ ♡</p>
-                <div style="display: flex; gap: 6px;">
-                    <span style="background: var(--accent-pink); color: var(--main-brown); font-size: 10px; padding: 4px 12px; border-radius: 20px;">ARTWORK</span>
-                    <span style="background: var(--accent-pink); color: var(--main-brown); font-size: 10px; padding: 4px 12px; border-radius: 20px;">DESIGN</span>
+                <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า</p>
+                <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+                    <span style="background: var(--accent-pink); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown);">ARTWORK</span>
+                    <span style="background: var(--accent-pink); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown);">DESIGN</span>
                 </div>
             </div>
 
             <div class="info-card">
-                <div class="section-title">📋 ขั้นตอนการสั่ง</div>
-                <div class="step-item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
-                <div class="step-item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
-                <div class="step-item"><span>3. ส่งบรีฟงาน & รอรับ</span><span>🕒</span></div>
+                <div class="section-title">📋 Ordering Steps</div>
+                <div class="item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
+                <div class="item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
+                <div class="item"><span>3. ส่งบรีฟ/รอรับงาน</span><span>📏</span></div>
             </div>
 
             <div class="info-card">
-                <div class="section-title">📍 กฎของร้าน</div>
-                <div class="step-item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
-                <div class="step-item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
+                <div class="section-title">📍 Store Rules</div>
+                <div class="item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
+                <div class="item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
             </div>
 
-            <p class="creative-tagline">" วาดความฝัน ถักทอจินตนาการ <br> ให้งานดีไซน์เล่าเรื่องราวในแบบของคุณเอง ♡ "</p>
+            <p class="footer-tagline">"สร้างสรรค์ผลงานด้วยความตั้งใจ <br>ให้ภาพวาดเล่าความสุขในแบบของคุณ" ♡</p>
 
-            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
                 <a href="https://line.me/ti/p/~melodyliz" class="btn btn-main">Contact Line</a>
-                <a href="#" class="btn btn-outline">Check Portfolio</a>
+                <a href="#" class="btn btn-outline">Check Queue</a>
             </div>
 
-            <p style="text-align: center; font-size: 10px; color: var(--main-brown); margin-top: 15px; font-weight: 500;">© 2026 Lityhao Store</p>
+            <p style="text-align: center; font-size: 10px; color: #634a44; margin-top: 10px;">© 2026 Lityhao Store</p>
         </div>
     </div>
 </div>
