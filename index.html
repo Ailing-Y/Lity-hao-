@@ -221,7 +221,14 @@ body {
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
-h1 { color: var(--dark-brown); font-size: 22px; margin-bottom: 5px; font-family: 'Pacifico', cursive; }
+/* เปลี่ยนฟอนต์ชื่อร้านฝั่งขวา */
+h1.shop-title-right {
+    font-family: 'Pacifico', cursive;
+    color: var(--light-brown-outline); /* สีน้ำตาลอ่อนลงนิดนึง */
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
 .desc { font-size: 12px; color: var(--main-brown); margin-bottom: 10px; }
 
 .section-title {
@@ -313,7 +320,7 @@ h1 { color: var(--dark-brown); font-size: 22px; margin-bottom: 5px; font-family:
 
         <div class="right-column">
             <div class="info-card">
-                <h1>Lityhao 🎀</h1>
+                <h1 class="shop-title-right">Lityha🌸 🎀</h1>
                 <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า</p>
                 <div style="display: flex; gap: 5px; flex-wrap: wrap;">
                     <span style="background: var(--accent-pink); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown);">ARTWORK</span>
