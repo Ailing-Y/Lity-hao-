@@ -7,193 +7,180 @@
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg-light: #FDF1F5; 
-    --main-brown: #92736C;
-    --soft-pink: #FCE4EC;
-    --dark-text: #634a44;
+    --bg: #FDF1F5; 
+    --main: #92736C;
+    --dark: #634a44;
     --white: #FFFFFF;
-    --window-bg: rgba(255, 255, 255, 0.85);
-    --card-shadow: 0 10px 25px rgba(146, 115, 108, 0.1);
+    --window-bg: rgba(255, 255, 255, 0.8);
+    --card-shadow: 0 8px 25px rgba(146, 115, 108, 0.08);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
 
 body {
-    min-height: 100vh;
+    background-color: var(--bg);
+    /* พื้นหลัง Pattern */
+    background-image: radial-gradient(#f8d7da 1px, transparent 1px);
+    background-size: 20px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
     padding: 20px;
-    position: relative;
-    overflow-x: hidden;
-    background-color: var(--bg-light);
 }
 
-/* พื้นหลังลาย Gingham & Flower ปรับสีให้อ่อนลง */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* ใส่ URL รูปพื้นหลังของคุณที่นี่ */
-    background-image: url('background_pattern.jpg'); 
-    background-size: cover;
-    background-position: center;
-    opacity: 0.3; /* ปรับให้สีอ่อนลงตามคำขอ */
-    z-index: -1;
-}
-
-/* หน้าต่างข้อมูลสัดส่วน 1:1 */
+/* ปรับกรอบหน้าต่างเป็น 1:1 */
 .browser-window {
-    width: 850px;
-    aspect-ratio: 1 / 1;
+    width: 800px;
+    aspect-ratio: 1 / 1; /* กำหนดสัดส่วน 1:1 */
     background: var(--window-bg);
-    backdrop-filter: blur(12px);
-    border-radius: 35px;
-    border: 2px solid var(--white);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.06);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    position: relative;
 }
 
-/* Header แถบด้านบน */
 .browser-header {
-    background: rgba(255, 255, 255, 0.7);
-    padding: 18px 25px;
+    background: rgba(255,255,255,0.9);
+    padding: 15px 25px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid rgba(146, 115, 108, 0.1);
+    gap: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
 }
-.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--soft-pink); }
+.dot { width: 10px; height: 10px; background: #EBCBC4; border-radius: 50%; }
 .address-bar {
     flex: 1;
-    background: var(--white);
+    background: #fff;
     border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 13px;
-    color: var(--main-brown);
+    padding: 6px 15px;
+    font-size: 12px;
+    color: #B8A39E;
     text-align: center;
-    border: 1px solid rgba(146, 115, 108, 0.1);
-    letter-spacing: 0.5px;
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
 .main-content {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 25px;
-    padding: 35px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 30px;
     flex: 1;
     overflow: hidden;
 }
 
-/* ฝั่งซ้าย: รูปทับกันแบบ Collage */
+/* ฝั่งซ้าย: รูปภาพ Collage */
 .left-column {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .image-stack {
     position: relative;
     width: 100%;
-    height: 90%;
+    height: 80%;
 }
-.photo-frame {
+
+.img-box {
     position: absolute;
-    background: var(--white);
+    background: #fff;
     padding: 12px;
     border-radius: 20px;
     box-shadow: var(--card-shadow);
+    overflow: hidden;
 }
-.photo-frame img {
+
+.img-1 {
+    width: 220px; height: 280px;
+    transform: rotate(-8deg);
+    top: 10%; left: 5%;
+    z-index: 1;
+}
+
+.img-2 {
+    width: 220px; height: 260px;
+    transform: rotate(6deg);
+    bottom: 15%; right: 5%;
+    z-index: 2;
+}
+
+.img-box img {
     width: 100%; height: 100%;
     object-fit: cover;
     border-radius: 12px;
 }
-.img-1 {
-    width: 250px; height: 340px;
-    top: 5%; left: 0;
-    transform: rotate(-7deg);
-    z-index: 1;
-}
-.img-2 {
-    width: 250px; height: 320px;
-    bottom: 5%; right: 0;
-    transform: rotate(5deg);
-    z-index: 2;
-    border: 1px solid var(--soft-pink);
-}
 
-/* ฝั่งขวา: ช่องข้อมูลแยกเป็น Card */
+/* ฝั่งขวา: ปรับเป็นช่องๆ (Card Style) */
 .right-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
-    padding-right: 8px;
+    padding-right: 5px;
 }
-.right-column::-webkit-scrollbar { width: 5px; }
-.right-column::-webkit-scrollbar-thumb { background: var(--soft-pink); border-radius: 10px; }
 
-.content-card {
-    background: var(--white);
-    border-radius: 22px;
+/* ปรับแต่ง Scrollbar */
+.right-column::-webkit-scrollbar { width: 4px; }
+.right-column::-webkit-scrollbar-thumb { background: #EBCBC4; border-radius: 10px; }
+
+.info-card {
+    background: #fff;
+    border-radius: 20px;
     padding: 20px;
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(146, 115, 108, 0.03);
 }
-.content-card:hover { transform: translateY(-3px); }
 
-h1 { color: var(--main-brown); font-size: 26px; margin-bottom: 5px; }
-.shop-desc { font-size: 13px; color: var(--dark-text); opacity: 0.8; margin-bottom: 12px; }
+h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
+.desc { font-size: 12px; color: var(--main); margin-bottom: 10px; }
 
-.section-label {
-    font-size: 15px;
-    color: var(--main-brown);
+.section-title {
+    font-size: 14px;
+    color: var(--dark);
     font-weight: 500;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
-}
-.section-label::after {
-    content: ""; flex: 1; height: 1px; background: var(--soft-pink);
+    border-left: 3px solid var(--main);
+    padding-left: 10px;
 }
 
-.step-item {
+.item {
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
     font-size: 13px;
-    color: var(--dark-text);
-    border-bottom: 1px dotted var(--soft-pink);
+    color: var(--dark);
+    border-bottom: 1px solid #fcf2f4;
 }
 
-/* ปุ่มและลิ้งก์ */
-.btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 5px; }
 .btn {
     display: block;
     text-align: center;
-    padding: 12px;
-    border-radius: 18px;
+    padding: 10px;
+    border-radius: 15px;
     text-decoration: none;
-    font-size: 14px;
     font-weight: 500;
+    font-size: 13px;
     transition: 0.3s;
 }
-.btn-primary { background: var(--main-brown); color: var(--white); }
-.btn-secondary { border: 1.5px dashed var(--main-brown); color: var(--main-brown); }
+.btn-main { background: var(--main); color: #fff; margin-top: 5px; }
+.btn-outline { border: 1.5px dashed var(--main); color: var(--main); }
 
-.sticker { position: absolute; z-index: 10; pointer-events: none; }
+.sticker { position: absolute; pointer-events: none; z-index: 10; }
 
-/* สำหรับมือถือ */
-@media (max-width: 850px) {
-    .browser-window { width: 95vw; aspect-ratio: auto; border-radius: 25px; }
+/* Responsive */
+@media (max-width: 768px) {
+    .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
-    .left-column { min-height: 400px; }
-    .img-1, .img-2 { width: 200px; height: 280px; }
+    .left-column { min-height: 350px; }
+    .img-1, .img-2 { width: 180px; height: 230px; }
 }
 </style>
 </head>
@@ -202,55 +189,53 @@ h1 { color: var(--main-brown); font-size: 26px; margin-bottom: 5px; }
 <div class="browser-window">
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        <div class="address-bar">www.lityhao-vibes.org</div>
-        <div style="font-size: 11px; color: var(--main-brown); font-weight: 500;">EXIT</div>
+        <div class="address-bar">lityhao.store/home</div>
+        <div style="font-size: 11px; color: #999; font-weight: 500;">EXIT</div>
     </div>
 
     <div class="main-content">
         <div class="left-column">
-            <img src="https://cdn-icons-png.flaticon.com/512/594/594846.png" class="sticker" style="top: 0; left: -10px; width: 60px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/594/594846.png" class="sticker" style="top: 5%; left: 0; width: 50px;">
             <div class="image-stack">
-                <div class="photo-frame img-1">
-                    <img src="logo.jpg" alt="Work Sample 1">
+                <div class="img-box img-1">
+                    <img src="logo.jpg" alt="Work 1">
                 </div>
-                <div class="photo-frame img-2">
-                    <img src="logo.jpg" alt="Work Sample 2">
+                <div class="img-box img-2">
+                    <img src="logo.jpg" alt="Work 2">
                 </div>
             </div>
-            <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="sticker" style="bottom: 5%; right: 10%; width: 50px; transform: rotate(15deg);">
+            <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="sticker" style="bottom: 10%; left: 5%; width: 40px; transform: rotate(-20deg);">
         </div>
 
         <div class="right-column">
-            <div class="content-card">
-                <h1>Lityhao Store 🎀</h1>
-                <p class="shop-desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า เค้าใจดีมากค่ะ ♡</p>
-                <div style="display: flex; gap: 6px;">
-                    <span style="background: var(--soft-pink); color: var(--main-brown); font-size: 10px; padding: 4px 12px; border-radius: 20px;">ARTWORK</span>
-                    <span style="background: var(--soft-pink); color: var(--main-brown); font-size: 10px; padding: 4px 12px; border-radius: 20px;">DESIGN</span>
+            <div class="info-card">
+                <h1>Lityhao 🎀</h1>
+                <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า</p>
+                <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+                    <span style="background: #FDF1F5; font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main);">ARTWORK</span>
+                    <span style="background: #FDF1F5; font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main);">DESIGN</span>
                 </div>
             </div>
 
-            <div class="content-card">
-                <div class="section-label">📋 ขั้นตอนการสั่ง</div>
-                <div class="step-item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
-                <div class="step-item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
-                <div class="step-item"><span>3. ส่งบรีฟงาน & รอรับ</span><span>🕒</span></div>
+            <div class="info-card">
+                <div class="section-title">📋 Ordering Steps</div>
+                <div class="item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
+                <div class="item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
+                <div class="item"><span>3. ส่งบรีฟ/รอรับงาน</span><span>📏</span></div>
             </div>
 
-            <div class="content-card">
-                <div class="section-label">📍 กฎของร้าน</div>
-                <div class="step-item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
-                <div class="step-item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
+            <div class="info-card">
+                <div class="section-title">📍 Store Rules</div>
+                <div class="item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
+                <div class="item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
             </div>
 
-            <div class="btn-group">
-                <a href="https://line.me/ti/p/~melodyliz" class="btn btn-primary">Contact via Line</a>
-                <a href="https://drive.google.com/drive/folders/1SFf1IDZwUtMov8K6ngfyp5y8-utq-Yqt" class="btn btn-secondary">Check Portfolio</a>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="https://line.me/ti/p/~melodyliz" class="btn btn-main">Contact Line</a>
+                <a href="#" class="btn btn-outline">Check Queue</a>
             </div>
 
-            <p style="text-align: center; font-size: 10px; color: var(--main-brown); margin-top: 10px; opacity: 0.6;">
-                © 2026 Lityhao Store . All rights reserved
-            </p>
+            <p style="text-align: center; font-size: 10px; color: #ccc; margin-top: 10px;">© 2026 Lityhao Store</p>
         </div>
     </div>
 </div>
