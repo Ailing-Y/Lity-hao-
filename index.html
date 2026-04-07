@@ -233,6 +233,100 @@ body {
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
+/* --- New CSS for Steps --- */
+.steps-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    position: relative;
+    padding-bottom: 15px;
+}
+.step-dot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5px;
+}
+.step-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--light-brown-outline);
+    border-radius: 50%;
+}
+.step-line {
+    width: 1.5px;
+    height: 20px;
+    background: var(--light-brown-outline);
+    margin-top: 5px;
+    opacity: 0.5;
+}
+.step-text {
+    font-size: 13px;
+    color: var(--dark-brown);
+}
+
+/* --- New CSS for Social Popups --- */
+.contact-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.btn-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.pop-label {
+    position: absolute;
+    left: 105%;
+    background: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--main-brown);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s;
+    white-space: nowrap;
+    pointer-events: none;
+    border: 1px solid var(--polka-dot);
+}
+.pop-img {
+    position: absolute;
+    left: 105%;
+    width: 60px;
+    height: 60px;
+    background: white;
+    padding: 4px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s;
+    cursor: pointer;
+    border: 1px solid var(--polka-dot);
+}
+.pop-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.btn-wrapper.active .pop-label,
+.btn-wrapper.active .pop-img {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
 .bottom-info-section {
     grid-column: 1 / span 2;
     display: grid;
@@ -242,7 +336,6 @@ body {
 }
 
 .pink-polka-box {
-    /* ปรับสีชมพูพื้นหลังให้อ่อนลงเป็น #FFF0F5 เพื่อความคุมโทนน่ารัก */
     background-color: #FFF0F5; 
     background-image: radial-gradient(#D7C2BC 1.5px, transparent 1.5px);
     background-size: 15px 15px;
@@ -281,28 +374,6 @@ h1.shop-title-right {
     border-left: 3px solid var(--main-brown);
     padding-left: 10px;
 }
-
-.item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 13px;
-    color: var(--dark-brown);
-    border-bottom: 1px dashed var(--accent-pink);
-}
-
-.btn {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    border-radius: 15px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 13px;
-    transition: 0.3s;
-}
-.btn-main { background: var(--main-brown); color: #fff; margin-top: 5px; }
-.btn-outline { border: 1.5px dashed var(--main-brown); color: var(--main-brown); background: rgba(255,255,255,0.8); }
 
 @media (max-width: 768px) {
     .browser-window { width: 95vw; height: auto; max-height: 90vh; aspect-ratio: auto; }
@@ -347,17 +418,24 @@ h1.shop-title-right {
                     Greetings! Welcome to your personal life.<br>
                     มาใช้บริการกันเยอะๆ น้าาา ✨
                 </p>
-                <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-                    <span style="background: var(--white); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown); border: 1px solid var(--polka-dot);">ARTWORK</span>
-                    <span style="background: var(--white); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown); border: 1px solid var(--polka-dot);">DESIGN</span>
-                </div>
             </div>
 
             <div class="info-card">
                 <div class="section-title">📋 Ordering Steps</div>
-                <div class="item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
-                <div class="item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
-                <div class="item"><span>3. ส่งบรีฟ/รอรับงาน</span><span>📏</span></div>
+                <div class="steps-wrapper">
+                    <div class="step-item">
+                        <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+                        <div class="step-text">ทักสอบถาม/บรีฟงาน</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+                        <div class="step-text">โอนเงินเต็มจำนวน</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-dot-container"><div class="step-dot"></div></div>
+                        <div class="step-text">ส่งบรีฟ/รอรับงาน</div>
+                    </div>
+                </div>
             </div>
 
             <div class="info-card">
@@ -366,8 +444,17 @@ h1.shop-title-right {
                 <div class="item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-                <a href="https://line.me/ti/p/~melodyliz" class="btn btn-main">Contact Line</a>
+            <div class="contact-container">
+                <div class="btn-wrapper" id="lineWrapper">
+                    <a href="javascript:void(0)" class="btn btn-main" style="width: 100%;" onclick="toggleContact('lineWrapper')">Contact Line</a>
+                    <div class="pop-label">melodyliz</div>
+                </div>
+                <div class="btn-wrapper" id="fbWrapper">
+                    <a href="javascript:void(0)" class="btn btn-main" style="width: 100%; background: #4a6ea8;" onclick="toggleContact('fbWrapper')">Contact Facebook</a>
+                    <div class="pop-img" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
+                        <img src="https://i.pinimg.com/564x/00/82/33/0082337a77e966967f8924b893278913.jpg" alt="fb-profile">
+                    </div>
+                </div>
                 <a href="#" class="btn btn-outline">Check Queue</a>
             </div>
         </div>
@@ -378,15 +465,11 @@ h1.shop-title-right {
                 • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ<br>
                 ยกเว้นโทนที่ติดกัน เช่น ตูนสีแดง โทนสีเขียว<br>
                 • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชัดเจนน้าา<br>
-                • ระบุขนาดของกระดาษที่ต้องการด้วยนะคับ<br>
-                • บรีฟรายละเอียดต่างๆ ได้ตามใจชอบเลยนะคะ
+                • ระบุขนาดของกระดาษที่ต้องการด้วยนะคับ
             </div>
             <div class="pink-polka-box">
                 <div style="text-align: center; margin-bottom: 12px; color: var(--main-brown); font-weight: 600;">Handcrafted with Love ✨🤍</div>
-                Greetings! Welcome to your personal life.<br>
-                มาใช้บริการกันเยอะๆ น้าาา<br><br>
                 <strong>รองาน โดยปกติ 1-2 วันนะคะ</strong><br>
-                เว้นแต่จะติดคิวนะคะ<br>
                 หากเกินกำหนดการที่แจ้งไว้<br>
                 สามารถแจ้งขออัพเดทงานและเร่งได้เลยทุกกรณีนะคะ
             </div>
@@ -399,6 +482,7 @@ h1.shop-title-right {
 </div>
 
 <script>
+    // --- Existing Image Stack Logic ---
     const images = [
         "♡︎_O6_♡︎_20260316133921.jpeg", "♡︎_O6_♡︎_20260316133909.jpeg", "♡︎_O6_♡︎_20260316133900.jpeg", 
         "♡︎_O6_♡︎_20260316133850.jpeg", "♡︎_O6_♡︎_20260316133840.jpeg", "♡︎_O6_♡︎_20260316133830.jpeg", 
@@ -441,7 +525,6 @@ h1.shop-title-right {
 
     function nextImage() { currentIndex = (currentIndex + 1) % images.length; updateClasses(); }
     function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateClasses(); }
-
     function startAutoPlay() { clearInterval(autoPlay); autoPlay = setInterval(nextImage, 3500); }
 
     let startX = 0;
@@ -454,6 +537,19 @@ h1.shop-title-right {
     function handleSwipe(s, e) {
         let diff = s - e;
         if (Math.abs(diff) > 30) { if (diff > 0) nextImage(); else prevImage(); }
+    }
+
+    // --- New Toggle Function for Contact ---
+    function toggleContact(id) {
+        const line = document.getElementById('lineWrapper');
+        const fb = document.getElementById('fbWrapper');
+        if (id === 'lineWrapper') {
+            line.classList.toggle('active');
+            fb.classList.remove('active');
+        } else {
+            fb.classList.toggle('active');
+            line.classList.remove('active');
+        }
     }
 
     initStack();
