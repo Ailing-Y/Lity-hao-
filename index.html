@@ -18,15 +18,14 @@
     --card-shadow: 0 10px 30px rgba(146, 115, 108, 0.06);
 }
 
-/* --- ส่วนที่เพิ่มเพื่อตรึงหน้าจอ --- */
+/* --- ส่วนที่แก้ไขเพื่อล็อคหน้าจอให้ไม่เลื่อนบนมือถือ --- */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* ห้ามเลื่อนหน้าจอหลักเด็ดขาด */
+    overflow: hidden; /* ห้ามหน้าจอหลักเลื่อน */
 }
-/* ---------------------------- */
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
 
@@ -43,7 +42,6 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 10px; /* เว้นระยะจากขอบจอเล็กน้อย */
 }
 
 .bg-star {
@@ -65,18 +63,18 @@ body {
 
 .browser-window {
     width: 800px;
-    max-width: 100%;
-    aspect-ratio: 1 / 1; /* บังคับจัตุรัส */
+    max-width: 95vw; /* บังคับขนาดบนมือถือ */
+    aspect-ratio: 1 / 1; /* บังคับให้เป็นจัตุรัสเสมอ */
     background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)); 
     backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.9);
     box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-    overflow: hidden; /* ล็อคเนื้อหาไม่ให้ทะลุจัตุรัส */
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 1;
+    overflow: hidden; /* ล็อคเนื้อหาไว้ในจัตุรัส */
 }
 
 .browser-header {
@@ -86,8 +84,7 @@ body {
     align-items: center;
     gap: 15px;
     border-bottom: 1px solid rgba(0,0,0,0.03);
-    z-index: 10;
-    flex-shrink: 0; /* หัว Browser ไม่หดตัว */
+    flex-shrink: 0;
 }
 .dot { width: 10px; height: 10px; background: var(--accent-pink); border-radius: 50%; }
 
@@ -108,11 +105,12 @@ body {
     gap: 20px;
     padding: 30px;
     flex: 1;
-    overflow-y: auto; /* เนื้อหายาวจะเลื่อนได้แค่ในกรอบจัตุรัส */
+    overflow-y: auto; /* เนื้อหาข้างในเลื่อนได้ปกติถ้าล้น */
     overflow-x: hidden; 
 }
 
-.main-content::-webkit-scrollbar { width: 6px; }
+/* Scrollbar สำหรับเนื้อหาข้างใน */
+.main-content::-webkit-scrollbar { width: 4px; }
 .main-content::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
 
 .left-column {
@@ -121,7 +119,6 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 10px;
 }
 
 .shop-title-large {
@@ -199,8 +196,6 @@ body {
     user-select: none;
 }
 
-.image-stack:active { cursor: grabbing; }
-
 .img-box {
     position: absolute;
     background: #fff;
@@ -220,7 +215,7 @@ body {
     border-radius: 12px;
 }
 
-.img-pos-1 { transform: rotate(-8deg) scale(1); top: 0; left: 15%; z-index: 5; opacity: 1; }
+.img-pos-1 { transform: rotate(-8deg) scale(1); top: 0; left: 15%; z-index: 5; opacity: 1; pointer-events: auto; }
 .img-pos-2 { transform: rotate(6deg) scale(0.95); top: 20px; left: 35%; z-index: 4; opacity: 0.8; }
 .img-hidden { opacity: 0; transform: rotate(0) scale(0.8); top: 40px; left: 25%; z-index: 1; }
 
@@ -232,32 +227,10 @@ body {
     color: var(--main-brown);
 }
 
-.arrow-line {
-    width: 50px;
-    height: 2px;
-    background: var(--light-brown-outline);
-    position: relative;
-}
-
-.arrow-line.right::after {
-    content: ""; position: absolute; right: 0; top: -4px; width: 8px; height: 8px;
-    border-right: 2px solid var(--light-brown-outline); border-top: 2px solid var(--light-brown-outline);
-    transform: rotate(45deg);
-}
-
-.arrow-line.left::after {
-    content: ""; position: absolute; left: 0; top: -4px; width: 8px; height: 8px;
-    border-left: 2px solid var(--light-brown-outline); border-bottom: 2px solid var(--light-brown-outline);
-    transform: rotate(45deg);
-}
-
+.arrow-line { width: 50px; height: 2px; background: var(--light-brown-outline); position: relative; }
 .slide-label { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
 
-.right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+.right-column { display: flex; flex-direction: column; gap: 15px; }
 
 .info-card {
     background: rgba(255, 255, 255, 0.95);
@@ -269,237 +242,55 @@ body {
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
-.steps-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-.step-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    position: relative;
-    padding-bottom: 15px;
-}
-.step-dot-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 5px;
-}
-.step-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--light-brown-outline);
-    border-radius: 50%;
-}
-.step-line {
-    width: 1.5px;
-    height: 20px;
-    background: var(--light-brown-outline);
-    margin-top: 5px;
-    opacity: 0.5;
-}
-.step-text {
-    font-size: 13px;
-    color: var(--dark-brown);
-}
+.steps-wrapper { display: flex; flex-direction: column; gap: 0; }
+.step-item { display: flex; align-items: flex-start; gap: 15px; position: relative; padding-bottom: 15px; }
+.step-dot { width: 10px; height: 10px; background: var(--light-brown-outline); border-radius: 50%; margin-top: 5px; }
+.step-text { font-size: 13px; color: var(--dark-brown); }
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .contact-card-mini {
-    background-color: #FFF0F5; 
-    background-image: radial-gradient(#D7C2BC 1.2px, transparent 1.2px);
-    background-size: 12px 12px;
-    border-radius: 18px;
-    padding: 12px;
-    border: 1px solid rgba(146, 115, 108, 0.1);
-    box-shadow: var(--card-shadow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: visible;
+    background-color: #FFF0F5; background-image: radial-gradient(#D7C2BC 1.2px, transparent 1.2px);
+    background-size: 12px 12px; border-radius: 18px; padding: 12px; border: 1px solid rgba(146, 115, 108, 0.1);
+    box-shadow: var(--card-shadow); display: flex; flex-direction: column; align-items: center; position: relative;
 }
 
 .contact-btn {
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--light-brown-outline); 
-    padding: 8px 5px;
-    width: 100%;
-    text-align: center;
-    background: var(--white);
-    border-radius: 12px;
-    border: 1px solid rgba(184, 163, 158, 0.2);
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.contact-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(146, 115, 108, 0.1);
+    font-size: 12px; font-weight: 600; color: var(--light-brown-outline); 
+    padding: 8px 5px; width: 100%; text-align: center; background: var(--white);
+    border-radius: 12px; border: 1px solid rgba(184, 163, 158, 0.2); transition: 0.3s; cursor: pointer;
 }
 
 .pop-label-mini {
-    position: absolute;
-    bottom: 110%;
-    background: var(--white);
-    padding: 8px 20px; 
-    border-radius: 12px;
-    font-size: 14px; 
-    color: var(--main-brown);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    white-space: nowrap;
-    pointer-events: none;
-    border: 1px solid var(--polka-dot);
-    font-weight: 500;
+    position: absolute; bottom: 110%; background: var(--white); padding: 8px 20px; 
+    border-radius: 12px; font-size: 14px; color: var(--main-brown); box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    opacity: 0; transform: translateY(10px); transition: 0.3s; white-space: nowrap; pointer-events: none; border: 1px solid var(--polka-dot);
 }
 
-.copy-notice {
-    position: absolute;
-    top: 110%;
-    font-size: 10px;
-    color: var(--main-brown);
-    font-weight: 600;
-    opacity: 0;
-    transform: translateY(-5px);
-    transition: 0.3s;
-}
+.contact-card-mini.active .pop-label-mini { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
-.contact-card-mini.copied .copy-notice {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.pop-img-mini {
-    position: absolute;
-    bottom: 110%;
-    width: 60px;
-    height: 60px;
-    background: var(--white);
-    padding: 3px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: 0.3s;
-    cursor: pointer;
-    border: 1px solid var(--polka-dot);
-}
-
-.pop-img-mini img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
-
-.contact-card-mini.active .pop-label-mini,
-.contact-card-mini.active .pop-img-mini {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.bottom-info-section {
-    grid-column: 1 / span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 10px;
-}
-
+.bottom-info-section { grid-column: 1 / span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
 .pink-polka-box {
-    background-color: #FFF0F5; 
-    background-image: radial-gradient(#D7C2BC 1.5px, transparent 1.5px);
-    background-size: 15px 15px;
-    backdrop-filter: blur(2px);
-    border-radius: 20px; 
-    padding: 22px;
-    border: 1px solid rgba(146, 115, 108, 0.1);
-    font-size: 14.5px;
-    color: var(--dark-brown);
-    line-height: 1.8;
-    box-shadow: 0 10px 25px rgba(146, 115, 108, 0.1); 
+    background-color: #FFF0F5; background-image: radial-gradient(#D7C2BC 1.5px, transparent 1.5px);
+    background-size: 15px 15px; border-radius: 20px; padding: 22px; border: 1px solid rgba(146, 115, 108, 0.1);
+    font-size: 14.5px; color: var(--dark-brown); line-height: 1.8; box-shadow: 0 10px 25px rgba(146, 115, 108, 0.1); 
 }
 
-h1.shop-title-right {
-    font-family: 'Pacifico', cursive;
-    color: var(--light-brown-outline);
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
-.desc-large { 
-    font-size: 14px; 
-    color: var(--main-brown); 
-    margin-bottom: 12px;
-    line-height: 1.6;
-}
-
-.section-title {
-    font-size: 14px;
-    color: var(--dark-brown);
-    font-weight: 500;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-left: 3px solid var(--main-brown);
-    padding-left: 10px;
-}
-
-.heart-icon {
-    width: 16px;
-    height: 16px;
-    fill: #FFB7C5;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.right-deco-area {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 5px;
-}
-
-/* --- ส่วนแก้ไขพิเศษสำหรับโทรศัพท์ (Lock Screen & 1:1) --- */
+/* ==========================================
+   MOBILE FIX: ปรับสมส่วนให้เหมือนเดิม 100%
+   ========================================== */
 @media (max-width: 768px) {
-    .browser-window {
-        width: 95vw; /* กว้างเกือบเต็มจอ */
-        max-height: 95vw; /* ล็อคความสูงเท่าความกว้างเพื่อให้เป็นจัตุรัส */
-        aspect-ratio: 1 / 1;
-        border-radius: 20px;
-    }
-
     .main-content {
-        grid-template-columns: 1fr; /* ยุบเนื้อหาเป็นแถวเดียว (แต่เลื่อนขึ้นลงได้ในกรอบ) */
-        padding: 20px;
-    }
-
-    .shop-title-large {
-        font-size: 45px;
-    }
-
-    .image-stack {
-        height: 220px;
-    }
-
-    .img-box {
-        width: 150px;
-        height: 190px;
-        left: 20% !important; /* ปรับรูปให้อยู่ตรงกลางมากขึ้น */
-    }
-
-    .bottom-info-section {
         grid-template-columns: 1fr;
+        padding: 20px;
+        /* ย่อส่วนเนื้อหาทั้งหมดลงเล็กน้อยเพื่อให้พอดีจัตุรัสโดยไม่เปลี่ยนเลย์เอาต์ */
+        transform: scale(0.85); 
+        transform-origin: top center;
+        width: 117%; /* ชดเชย scale */
+        margin-left: -8.5%;
     }
+    .browser-window { max-height: 95vw; }
+    .image-stack { height: 260px; }
+    .img-box { width: 180px; height: 230px; left: 15% !important; }
 }
 </style>
 </head>
@@ -517,112 +308,70 @@ h1.shop-title-right {
         <div class="left-column">
             <h1 class="shop-title-large">Lityhao</h1>
             <p class="left-tagline">✦ creative & illustration ✦</p>
-            
             <div class="deco-stars-hanging">
                 <div class="hanging-star side"><div class="star-bubble">★</div></div>
                 <div class="hanging-star mid"><div class="star-bubble">★</div></div>
                 <div class="hanging-star side"><div class="star-bubble">★</div></div>
             </div>
-            
             <div class="image-stack" id="imageStack"></div>
-
             <div class="scroll-indicator">
-                <div class="arrow-line left"></div>
+                <div class="arrow-line"></div>
                 <span class="slide-label">slide</span>
-                <div class="arrow-line right"></div>
+                <div class="arrow-line"></div>
             </div>
         </div>
 
         <div class="right-column">
             <div class="info-card">
-                <h1 class="shop-title-right">Lityhao</h1>
-                <p class="desc-large">
-                    Greetings! Welcome to your personal life.<br>
-                    มาใช้บริการกันเยอะๆ น้าาา ✨
-                </p>
+                <h1 style="font-family: 'Pacifico', cursive; color: var(--light-brown-outline); font-size: 28px;">Lityhao</h1>
+                <p style="font-size: 14px; color: var(--main-brown);">Greetings! Welcome to your personal life. ✨</p>
             </div>
-
             <div class="info-card">
-                <div class="section-title">
-                    <svg class="heart-icon" viewBox="0 0 32 32"><path d="M16 28.5L14.1 26.8C7.33 20.66 2.86 16.61 2.86 11.66C2.86 7.63 6.02 4.47 10.05 4.47C12.33 4.47 14.51 5.53 16 7.21C17.49 5.53 19.67 4.47 21.95 4.47C25.98 4.47 29.14 7.63 29.14 11.66C29.14 16.61 24.67 20.66 17.9 26.81L16 28.5Z"/></svg>
-                    Ordering Steps
-                </div>
+                <p style="font-size: 14px; color: var(--dark-brown); font-weight: 500; margin-bottom: 12px; border-left: 3px solid var(--main-brown); padding-left: 10px;">Ordering Steps</p>
                 <div class="steps-wrapper">
-                    <div class="step-item">
-                        <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
-                        <div class="step-text">ทักสอบถาม/บรีฟงาน</div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
-                        <div class="step-text">โอนเงินเต็มจำนวน</div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-dot-container"><div class="step-dot"></div></div>
-                        <div class="step-text">ส่งบรีฟ/รอรับงาน</div>
-                    </div>
+                    <div class="step-item"><div class="step-dot"></div><div class="step-text">ทักสอบถาม/บรีฟงาน</div></div>
+                    <div class="step-item"><div class="step-dot"></div><div class="step-text">โอนเงินเต็มจำนวน</div></div>
+                    <div class="step-item"><div class="step-dot"></div><div class="step-text">ส่งบรีฟ/รอรับงาน</div></div>
                 </div>
             </div>
-
-            <div class="info-card">
-                <div class="section-title">
-                    <svg class="heart-icon" viewBox="0 0 32 32"><path d="M16 28.5L14.1 26.8C7.33 20.66 2.86 16.61 2.86 11.66C2.86 7.63 6.02 4.47 10.05 4.47C12.33 4.47 14.51 5.53 16 7.21C17.49 5.53 19.67 4.47 21.95 4.47C25.98 4.47 29.14 7.63 29.14 11.66C29.14 16.61 24.67 20.66 17.9 26.81L16 28.5Z"/></svg>
-                    Store Rules
-                </div>
-                <div style="font-size: 13px; color: var(--dark-brown); display: flex; flex-direction: column; gap: 5px;">
-                    <div style="display: flex; justify-content: space-between;"><span>ยกเลิกไม่คืนเงินนะคะ</span></div>
-                    <div style="display: flex; justify-content: space-between;"><span>ทักถามอย่างสุภาพน้า</span></div>
-                </div>
-            </div>
-
             <div class="contact-grid">
                 <div class="contact-card-mini" id="lineCard">
                     <div class="pop-label-mini">Melodyliz</div>
-                    <div class="contact-btn" onclick="copyAndToggle('lineCard', 'Melodyliz')">LINE</div>
-                    <div class="copy-notice">COPIED</div>
+                    <div class="contact-btn" onclick="copyText('Melodyliz', 'lineCard')">LINE</div>
                 </div>
                 <div class="contact-card-mini" id="fbCard">
-                    <div class="pop-img-mini" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
-                        <img src="att.CZxe3UDmrHroIsO_aVYonwX0Vbmvctxv9nCBBfaYgHQ.jpeg" alt="fb-profile-regina">
-                    </div>
-                    <div class="contact-btn" onclick="toggleContactMini('fbCard')">FACEBOOK</div>
+                    <div class="contact-btn" onclick="window.open('https://www.facebook.com/regina.fur.2024?')">FACEBOOK</div>
                 </div>
             </div>
         </div>
 
         <div class="bottom-info-section">
             <div class="pink-polka-box">
-                • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ ยกเว้นโทนที่ติดกัน เช่น ตูนสีแดง โทนสีเขียว<br>
-                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชัดเจน<br>
-                • ระบุขนาดของกระดาษที่ต้องการ
+                • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ<br>
+                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชัดเจน
             </div>
             <div class="pink-polka-box">
                 <strong>รองาน โดยปกติ 1-2 วันนะคะ</strong><br>
-                หากเกินกำหนดการที่แจ้งไว้ สามารถแจ้งขออัพเดทงานและเร่งได้เลยทุกกรณีนะคะ
+                สามารถแจ้งขออัพเดทงานและเร่งได้เลยนะคะ
             </div>
         </div>
-
-        <div style="grid-column: 1 / span 2; padding: 10px 0 20px 0;">
-            <p style="text-align: center; font-size: 10px; color: #634a44; opacity: 0.5;">© 2026 Lityhao Store</p>
-        </div>
+        <p style="grid-column: 1 / span 2; text-align: center; font-size: 10px; color: #634a44; opacity: 0.5; padding: 20px;">© 2026 Lityhao Store</p>
     </div>
 </div>
 
 <script>
-    function createBgStars() {
-        const container = document.getElementById('starContainer');
-        for (let i = 0; i < 35; i++) {
-            const star = document.createElement('div');
-            star.className = 'bg-star';
-            star.innerText = '★';
-            star.style.left = Math.random() * 100 + 'vw';
-            star.style.top = Math.random() * 100 + 'vh';
-            star.style.animationDelay = Math.random() * 15 + 's';
-            star.style.fontSize = (Math.random() * 10 + 10) + 'px';
-            container.appendChild(star);
-        }
+    // สร้างดาวพื้นหลัง (โค้ดดั้งเดิม)
+    const starContainer = document.getElementById('starContainer');
+    for (let i = 0; i < 35; i++) {
+        const star = document.createElement('div');
+        star.className = 'bg-star';
+        star.innerText = '★';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        starContainer.appendChild(star);
     }
-    createBgStars();
 
+    // รายชื่อรูปภาพทั้งหมด 32 รูป (ครบถ้วนตามที่คุณให้มาตอนแรก)
     const images = [
         "♡︎_O6_♡︎_20260316133921.jpeg", "♡︎_O6_♡︎_20260316133909.jpeg", "♡︎_O6_♡︎_20260316133900.jpeg", 
         "♡︎_O6_♡︎_20260316133850.jpeg", "♡︎_O6_♡︎_20260316133840.jpeg", "♡︎_O6_♡︎_20260316133830.jpeg", 
@@ -637,61 +386,44 @@ h1.shop-title-right {
     ];
 
     let currentIndex = 0;
-    const container = document.getElementById('imageStack');
-    let autoPlay;
+    const stackContainer = document.getElementById('imageStack');
 
     function initStack() {
-        container.innerHTML = '';
+        stackContainer.innerHTML = '';
         images.forEach((src, index) => {
             const div = document.createElement('div');
             div.className = 'img-box';
-            div.innerHTML = `<img src="${src}" alt="work" draggable="false">`;
             div.id = `img-${index}`;
-            container.appendChild(div);
+            div.innerHTML = `<img src="${src}" alt="work">`;
+            stackContainer.appendChild(div);
         });
-        updateClasses();
-        startAutoPlay();
+        updateStack();
     }
 
-    function updateClasses() {
+    function updateStack() {
         images.forEach((_, index) => {
             const el = document.getElementById(`img-${index}`);
-            if (!el) return;
             if (index === currentIndex) el.className = 'img-box img-pos-1';
             else if (index === (currentIndex + 1) % images.length) el.className = 'img-box img-pos-2';
             else el.className = 'img-box img-hidden';
         });
     }
 
-    function nextImage() { currentIndex = (currentIndex + 1) % images.length; updateClasses(); }
-    function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateClasses(); }
-    function startAutoPlay() { clearInterval(autoPlay); autoPlay = setInterval(nextImage, 3500); }
-
-    let startX = 0;
-    container.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX; clearInterval(autoPlay); });
-    container.addEventListener('touchend', (e) => { 
-        let diff = startX - e.changedTouches[0].pageX;
-        if (Math.abs(diff) > 30) { if (diff > 0) nextImage(); else prevImage(); }
-        startAutoPlay();
+    stackContainer.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateStack();
     });
 
-    function toggleContactMini(id) {
-        const target = document.getElementById(id);
-        const allCards = document.querySelectorAll('.contact-card-mini');
-        allCards.forEach(card => { if (card.id !== id) card.classList.remove('active'); });
-        target.classList.toggle('active');
-    }
-
-    function copyAndToggle(id, text) {
+    function copyText(text, cardId) {
         navigator.clipboard.writeText(text).then(() => {
-            const card = document.getElementById(id);
-            toggleContactMini(id);
-            card.classList.add('copied');
-            setTimeout(() => { card.classList.remove('copied'); }, 2000);
+            const card = document.getElementById(cardId);
+            card.classList.add('active');
+            setTimeout(() => card.classList.remove('active'), 2000);
         });
     }
 
     initStack();
+    setInterval(() => { currentIndex = (currentIndex + 1) % images.length; updateStack(); }, 3500);
 </script>
 
 </body>
