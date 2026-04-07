@@ -10,6 +10,7 @@
 :root {
     --bg-light: #FFFBFB; 
     --main-brown: #92736C;
+    --light-brown: #A88B84; /* สีน้ำตาลที่อ่อนลงสำหรับชื่อร้าน */
     --dark-brown: #634a44;
     --white: #FFFFFF;
     --accent-pink: #FCE4EC;
@@ -89,13 +90,25 @@ body {
     padding-top: 10px;
 }
 
+/* ปรับสีชื่อร้านให้อ่อนลงและมีลายทางข้างใน */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
     font-size: 60px;
-    color: var(--main-brown);
-    text-align: center;
     margin-bottom: -5px; 
-    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(146, 115, 108, 0.1);
+    text-align: center;
+    
+    /* สร้างลายทางอ่อนๆ ข้างในตัวอักษร */
+    background: repeating-linear-gradient(
+        45deg,
+        var(--light-brown),
+        var(--light-brown) 4px,
+        #BCA59F 4px,
+        #BCA59F 8px
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    filter: drop-shadow(2px 2px 0px #fff);
 }
 
 .left-tagline {
@@ -108,7 +121,7 @@ body {
     opacity: 0.8;
 }
 
-/* ส่วนตกแต่งดาวห้อย */
+/* ส่วนตกแต่งดาวห้อยปรับเป็นขอบมน */
 .deco-stars-hanging {
     width: 100%;
     position: relative;
@@ -133,46 +146,37 @@ body {
     border-radius: 1px;
 }
 
-/* ปรับปรุง Star Bubble: เอาพื้นหลังวงกลมออก และสร้างเลเยอร์ดาวซ้อนกัน */
 .star-bubble {
-    color: var(--main-brown); /* สีดาวหลัก */
-    font-size: 32px; /* ขนาดดาวใหญ่ขึ้น */
-    width: 44px; /* กำหนดขนาดพื้นที่เพื่อให้ตำแหน่งคงที่ */
+    color: var(--main-brown);
+    font-size: 32px;
+    width: 44px;
     height: 44px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
-    margin-top: -5px; 
-    text-shadow: 0 4px 10px rgba(146, 115, 108, 0.1); /* เงาบางๆให้ดาวมีมิติ */
+    margin-top: -5px;
+    /* ปรับให้ดาวดูขอบมนนวลขึ้น */
+    filter: drop-shadow(0 2px 3px rgba(146, 115, 108, 0.1));
 }
 
-/* สร้างเลเยอร์ดาวสีชมพูอ่อนมนๆซ้อนด้านหลัง */
 .star-bubble::after {
-    content: "★"; /* ใช้ตัวอักษรดาวตัวเดิม */
+    content: "★";
     position: absolute;
-    color: var(--accent-pink); /* สีชมพูอ่อน */
-    font-size: 36px; /* ดาวหลังใหญ่กว่านิดหน่อย */
-    top: 3px; /* เขยิบลงมาหน่อย */
-    left: 4px; /* เขยิบขวาหน่อย */
-    z-index: -1; /* อยู่หลังดาวหลัก */
-    opacity: 0.8;
-    /* ปรับขอบให้ดูมนๆนุ่มๆด้วย blur */
-    filter: blur(1.5px); 
+    color: var(--accent-pink);
+    font-size: 36px;
+    top: 3px;
+    left: 4px;
+    z-index: -1;
+    opacity: 0.9;
+    /* เบลอขอบดาวชมพูให้ดูมนและฟุ้งๆ */
+    filter: blur(2px);
 }
 
 .hanging-star.mid::before { height: 40px; }
-.hanging-star.mid .star-bubble { 
-    font-size: 38px; 
-    width: 50px; 
-    height: 50px; 
-}
-.hanging-star.mid .star-bubble::after {
-    font-size: 42px;
-    top: 4px;
-    left: 5px;
-}
+.hanging-star.mid .star-bubble { font-size: 38px; width: 50px; height: 50px; }
+.hanging-star.mid .star-bubble::after { font-size: 42px; top: 4px; left: 5px; }
 
 .image-stack {
     position: relative;
