@@ -10,7 +10,7 @@
 :root {
     --bg-light: #FFFBFB; 
     --main-brown: #92736C;
-    --light-brown: #B09892; /* ปรับสีพื้นฐานของชื่อร้านให้อ่อนลงเล็กน้อย */
+    --light-brown: #A88B84; /* สีน้ำตาลที่อ่อนลงสำหรับชื่อร้าน */
     --dark-brown: #634a44;
     --white: #FFFFFF;
     --accent-pink: #FCE4EC;
@@ -91,14 +91,14 @@ body {
     padding-top: 10px;
 }
 
-/* ปรับสีชื่อร้านและลายทางข้างในให้อ่อนลง */
+/* ปรับสีชื่อร้านให้อ่อนลงและมีลายทางข้างใน */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
     font-size: 60px;
     margin-bottom: -5px; 
     text-align: center;
     
-    /* ปรับลายทางอ่อนๆ ข้างในตัวอักษรให้อ่อนลงกว่าเดิม */
+    /* สร้างลายทางอ่อนๆ ข้างในตัวอักษรให้อ่อนลงกว่าเดิม */
     background: repeating-linear-gradient(
         45deg,
         var(--light-brown),
@@ -122,7 +122,7 @@ body {
     opacity: 0.8;
 }
 
-/* ส่วนตกแต่งดาวห้อย */
+/* ส่วนตกแต่งดาวห้อยปรับเป็นขอบมนและใหญ่ขึ้น */
 .deco-stars-hanging {
     width: 100%;
     position: relative;
@@ -147,42 +147,33 @@ body {
     border-radius: 1px;
 }
 
+/* ปรับปรุง Star Bubble: เอาเลเยอร์ออก และสร้างดาวขอบมนสีชมพูอ่อนขนาดใหญ่ */
 .star-bubble {
-    color: var(--main-brown);
-    font-size: 32px;
-    width: 44px;
-    height: 44px;
+    color: var(--accent-pink); /* สีชมพูอ่อน */
+    font-size: 38px; /* ปรับขนาดดาวให้ใหญ่ขึ้นมาก */
+    width: 50px; /* กำหนดขนาดพื้นที่เพื่อให้ตำแหน่งคงที่ */
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
-    margin-top: -5px;
-    filter: drop-shadow(0 2px 3px rgba(146, 115, 108, 0.1));
+    margin-top: -5px; 
+    
+    /* เพิ่มเงาบางๆให้ดาวมีมิติและดูขอบมนขึ้น */
+    filter: drop-shadow(0 4px 6px rgba(146, 115, 108, 0.08));
 }
 
-/* ปรับปรุงให้ดาวชมพูข้างหลังเป็นขอบมนแบบเห็นได้ชัด */
+/* เอาเลเยอร์ซ้อนกันออก */
 .star-bubble::after {
-    /* ใช้ SVG Star ที่มีขอบมน (Rounded corners) */
-    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="%23FCE4EC" d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 471.1C465.1 483 460.3 495 450.8 502.1C441.3 509.2 428.3 510.3 417.8 504.7L288 436.5L158.2 504.7C150.7 508.7 141.5 509.5 133.5 506.7C125.4 503.9 119 497.5 116.2 489.5L112.9 481.1C110.9 473.1 111.7 464.7 115.1 457.1L137.5 328.1L33.3 225.9C24.7 217.3 21.6 204.7 25.4 193.1C29.2 181.6 39.2 173.2 51.1 171.5L194.8 150.3L259.1 19.9C264.4 8.2 276.3 0 288 0C299.7 0 311.6 8.2 316.9 19.9L381.2 150.3Z"/></svg>');
-    position: absolute;
-    width: 38px; /* ปรับขนาดให้เหมาะสม */
-    height: 38px;
-    top: 5px; /* ปรับตำแหน่ง */
-    left: 5px;
-    z-index: -1;
-    opacity: 0.9;
-    /* ลด blur ลงเพื่อให้เห็นขอบมนชัดเจนขึ้น */
-    filter: blur(0.5px); 
+    content: none;
 }
 
 .hanging-star.mid::before { height: 40px; }
-.hanging-star.mid .star-bubble { font-size: 38px; width: 50px; height: 50px; }
-.hanging-star.mid .star-bubble::after { 
-    width: 44px;
-    height: 44px;
-    top: 6px; 
-    left: 6px; 
+.hanging-star.mid .star-bubble { 
+    font-size: 44px; /* ดาวกลางใหญ่กว่าเพื่อน */
+    width: 58px; 
+    height: 58px; 
 }
 
 .image-stack {
