@@ -33,7 +33,6 @@ body {
 
 .browser-window {
     width: 800px;
-    aspect-ratio: 1 / 1;
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)); 
     backdrop-filter: blur(10px);
     border-radius: 30px;
@@ -43,6 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 95vh;
 }
 
 .browser-header {
@@ -72,8 +72,7 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 30px;
-    flex: 1;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .left-column {
@@ -150,13 +149,16 @@ body {
 .hanging-star.mid::before { height: 40px; }
 .hanging-star.mid .star-bubble { font-size: 44px; width: 58px; height: 58px; }
 
-/* Image Stack - ปรับความเร็วการเปลี่ยนให้นุ่มนวลขึ้น */
+/* Image Stack */
 .image-stack {
     position: relative;
     width: 100%;
     height: 300px;
     margin-top: 20px;
+    cursor: grab;
+    user-select: none;
 }
+.image-stack:active { cursor: grabbing; }
 
 .img-box {
     position: absolute;
@@ -164,10 +166,11 @@ body {
     padding: 12px;
     border-radius: 20px;
     box-shadow: var(--card-shadow);
-    transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1); /* ขยับช้าๆ */
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     width: 200px;
     height: 250px;
     opacity: 0;
+    pointer-events: none;
 }
 
 .img-box img {
@@ -176,61 +179,51 @@ body {
     border-radius: 12px;
 }
 
-/* ตำแหน่งสำหรับรูปที่โชว์ */
-.img-pos-1 { 
-    transform: rotate(-8deg) scale(1); 
-    top: 0; left: 15%; 
-    z-index: 5; 
-    opacity: 1;
-}
-.img-pos-2 { 
-    transform: rotate(6deg) scale(0.95); 
-    top: 20px; left: 35%; 
-    z-index: 4; 
-    opacity: 0.8;
-}
-.img-hidden { 
-    opacity: 0; 
-    transform: rotate(0) scale(0.8); 
-    top: 40px; left: 25%;
-    z-index: 1; 
-}
+.img-pos-1 { transform: rotate(-8deg) scale(1); top: 0; left: 15%; z-index: 5; opacity: 1; }
+.img-pos-2 { transform: rotate(6deg) scale(0.95); top: 20px; left: 35%; z-index: 4; opacity: 0.8; }
+.img-hidden { opacity: 0; transform: rotate(0) scale(0.8); top: 40px; left: 25%; z-index: 1; }
 
-/* สัญลักษณ์ลูกศรเลื่อนด้านล่าง */
+/* ปรับปรุง Slide Indicator */
 .scroll-indicator {
     margin-top: 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--light-brown-outline);
-    font-size: 14px;
-    opacity: 0.6;
+    gap: 15px;
+    color: var(--main-brown);
 }
 
 .arrow-line {
-    width: 40px;
-    height: 1px;
-    border-top: 1.5px dashed var(--light-brown-outline);
+    width: 50px;
+    height: 2px;
+    background: var(--light-brown-outline);
     position: relative;
 }
 
 .arrow-line::after {
-    content: "˃";
+    content: "";
     position: absolute;
-    right: -2px;
-    top: -10px;
+    right: 0;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--light-brown-outline);
+    border-top: 2px solid var(--light-brown-outline);
+    transform: rotate(45deg);
+}
+
+.slide-text {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Mitr', sans-serif;
 }
 
 .right-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    overflow-y: auto;
-    padding-right: 5px;
 }
-
-.right-column::-webkit-scrollbar { width: 4px; }
-.right-column::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
 
 .info-card {
     background: rgba(255, 255, 255, 0.95);
@@ -272,6 +265,26 @@ h1.shop-title-right {
     border-bottom: 1px dashed var(--accent-pink);
 }
 
+/* ส่วนที่เพิ่มใหม่: 2 ช่องด้านล่าง */
+.extra-info-container {
+    grid-column: 1 / span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    color: var(--dark-brown);
+    line-height: 1.8;
+}
+
 .footer-tagline {
     text-align: center;
     font-size: 12px;
@@ -295,8 +308,9 @@ h1.shop-title-right {
 .btn-outline { border: 1.5px dashed var(--main-brown); color: var(--main-brown); background: rgba(255,255,255,0.8); }
 
 @media (max-width: 768px) {
-    .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
-    .main-content { grid-template-columns: 1fr; overflow-y: auto; }
+    .browser-window { width: 95vw; max-height: none; }
+    .main-content { grid-template-columns: 1fr; }
+    .extra-info-container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -324,9 +338,9 @@ h1.shop-title-right {
                 </div>
 
             <div class="scroll-indicator">
-                <div class="arrow-line"></div>
-                <span style="font-size: 11px;">slide</span>
                 <div class="arrow-line" style="transform: scaleX(-1);"></div>
+                <span class="slide-text">SLIDE</span>
+                <div class="arrow-line"></div>
             </div>
         </div>
 
@@ -359,7 +373,26 @@ h1.shop-title-right {
                 <a href="https://line.me/ti/p/~melodyliz" class="btn btn-main">Contact Line</a>
                 <a href="#" class="btn btn-outline">Check Queue</a>
             </div>
-            <p style="text-align: center; font-size: 10px; color: #634a44; margin-top: 10px;">© 2026 Lityhao Store</p>
+        </div>
+
+        <div class="extra-info-container">
+            <div class="glass-card">
+                • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ<br>
+                ยกเว้นโทนส์ทีติดกัน เช่น คูนส์แดง โทนสีเขียว<br>
+                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชิดเจนน้า<br>
+                • ระบุขนาดของกระดาษที่ต้องการด้วยนะดับ<br>
+                • บรีฟรายละเอียดต่างๆ ได้ตามใจชอบเลยนะคะ
+            </div>
+            <div class="glass-card">
+                <strong>รองาน โดยปกติ 1-2 วันนะคะ</strong><br>
+                เว้นแต่จะติดคิวนะคะ<br>
+                หากเกินกำหนดการที่แจ้งไว้<br>
+                สามารถแจ้งขออัพเดทงานและเร่งได้เลยทุกกรณีนะคะ
+            </div>
+        </div>
+        
+        <div style="grid-column: 1 / span 2; text-align: center; padding-bottom: 20px;">
+            <p style="font-size: 10px; color: #634a44;">© 2026 Lityhao Store</p>
         </div>
     </div>
 </div>
@@ -368,44 +401,34 @@ h1.shop-title-right {
     const images = [
         "♡︎_O6_♡︎_20260316133921.jpeg", "♡︎_O6_♡︎_20260316133909.jpeg", "♡︎_O6_♡︎_20260316133900.jpeg", 
         "♡︎_O6_♡︎_20260316133850.jpeg", "♡︎_O6_♡︎_20260316133840.jpeg", "♡︎_O6_♡︎_20260316133830.jpeg", 
-        "♡︎_O6_♡︎_20260316133820.png", "♡︎_O6_♡︎_20260315161646.jpeg", "♡︎_O6_♡︎_20260315161635.jpeg", 
-        "♡︎_O6_♡︎_20260315161624.jpeg", "♡︎_O6_♡︎_20260311185259.jpeg", "♡︎_O6_♡︎_20260311185247.jpeg", 
-        "♡︎_O6_♡︎_20260311185239.jpeg", "♡︎_O6_♡︎_20260311164336.jpeg", "♡︎_O6_♡︎_20260311164325.jpeg", 
-        "♡︎_O6_♡︎_20260311164312.jpeg", "♡︎_O6_♡︎_20260311164302.jpeg", "♡︎_O6_♡︎_20260311164252.jpeg", 
-        "♡︎_O6_♡︎_20260311164244.jpeg", "♡︎_O6_♡︎_20260311164234.jpeg", "♡︎_O6_♡︎_20260311164224.jpeg", 
-        "♡︎_O6_♡︎_20260311164214.jpeg", "♡︎_O6_♡︎_20260311164206.jpeg", "IMG_0600.jpeg", 
-        "IMG_0599.jpeg", "IMG_0598.jpeg", "IMG_0011.jpeg", "IMG_0010.jpeg", 
-        "IMG_0009.jpeg", "IMG_0008.jpeg", "IMG_0007.jpeg", "IMG_0006.jpeg"
+        "♡︎_O6_♡︎_20260311164224.jpeg", "IMG_0006.jpeg"
     ];
 
     let currentIndex = 0;
     const container = document.getElementById('imageStack');
+    let autoPlay;
 
     function initStack() {
         container.innerHTML = '';
         images.forEach((src, index) => {
             const div = document.createElement('div');
             div.className = 'img-box';
-            div.innerHTML = `<img src="${src}" alt="work">`;
+            div.innerHTML = `<img src="${src}" alt="work" draggable="false">`;
             div.id = `img-${index}`;
             container.appendChild(div);
         });
         updateClasses();
+        startAutoPlay();
     }
 
     function updateClasses() {
         images.forEach((_, index) => {
             const el = document.getElementById(`img-${index}`);
-            // รูปที่ 1 (บนสุด)
             if (index === currentIndex) {
                 el.className = 'img-box img-pos-1';
-            } 
-            // รูปที่ 2 (ซ้อนหลัง)
-            else if (index === (currentIndex + 1) % images.length) {
+            } else if (index === (currentIndex + 1) % images.length) {
                 el.className = 'img-box img-pos-2';
-            }
-            // รูปอื่นๆ (ซ่อน)
-            else {
+            } else {
                 el.className = 'img-box img-hidden';
             }
         });
@@ -416,10 +439,47 @@ h1.shop-title-right {
         updateClasses();
     }
 
-    // เริ่มทำงาน
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateClasses();
+    }
+
+    function startAutoPlay() {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(nextImage, 3500);
+    }
+
+    // Touch & Swipe Functionality
+    let startX = 0;
+    container.addEventListener('mousedown', (e) => {
+        startX = e.pageX;
+        clearInterval(autoPlay);
+    });
+
+    container.addEventListener('mouseup', (e) => {
+        let moveX = e.pageX - startX;
+        if (Math.abs(moveX) > 50) {
+            if (moveX > 0) prevImage();
+            else nextImage();
+        }
+        startAutoPlay();
+    });
+
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        clearInterval(autoPlay);
+    });
+
+    container.addEventListener('touchend', (e) => {
+        let moveX = e.changedTouches[0].pageX - startX;
+        if (Math.abs(moveX) > 50) {
+            if (moveX > 0) prevImage();
+            else nextImage();
+        }
+        startAutoPlay();
+    });
+
     initStack();
-    // ตั้งค่าเลื่อนวนอัตโนมัติ ทุก 3.5 วินาที เพื่อให้เห็นการขยับช้าๆ นุ่มๆ
-    setInterval(nextImage, 3500);
 </script>
 
 </body>
