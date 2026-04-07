@@ -13,6 +13,7 @@
     --dark-brown: #634a44;
     --white: #FFFFFF;
     --accent-pink: #FCE4EC;
+    --text-pink-outline: #F8BBD0; /* สีชมพูสำหรับขอบตัวอักษร */
     --polka-dot: #FFEDF1;
     --window-bg: rgba(255, 255, 255, 0.75); 
     --card-shadow: 0 10px 30px rgba(146, 115, 108, 0.06);
@@ -89,15 +90,25 @@ body {
     padding-top: 10px;
 }
 
-/* ปรับปรุงชื่อร้าน: เอาขอบสีชมพูออก เหลือเพียงสีน้ำตาลละมุน */
+/* ปรับปรุงชื่อร้านตามภาพตัวอย่าง: ขอบชมพูอ่อน + เงาซ้อนแบบมีมิติ */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
-    font-size: 60px;
-    margin-bottom: -5px; 
+    font-size: 70px;
+    margin-bottom: 10px; 
     text-align: center;
-    color: var(--main-brown);
-    /* เอา text-shadow สีชมพูออกทั้งหมด */
-    text-shadow: none;
+    color: var(--white); /* สีตัวอักษรเป็นสีขาวเพื่อให้เห็นขอบชมพูชัด */
+    
+    /* สร้าง Layer ขอบและเงาตามตัวอย่าง */
+    text-shadow: 
+        /* เลเยอร์ 1: ขอบสีชมพูอ่อนรอบตัวอักษร */
+        -2px -2px 0 var(--text-pink-outline),  
+         2px -2px 0 var(--text-pink-outline),
+        -2px  2px 0 var(--text-pink-outline),
+         2px  2px 0 var(--text-pink-outline),
+        /* เลเยอร์ 2: สร้างเงาหนาลงมาด้านล่างขวาเพื่อให้ดูมีมิติ (3D Look) */
+        4px 4px 0px var(--accent-pink),
+        /* เลเยอร์ 3: เงาฟุ้งจางๆ ชั้นสุดท้ายเพื่อให้ดูละมุนแบบในรูป */
+        0px 6px 12px rgba(248, 187, 208, 0.5);
 }
 
 .left-tagline {
@@ -106,7 +117,7 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     opacity: 0.8;
 }
 
