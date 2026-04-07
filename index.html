@@ -276,7 +276,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
+    /* margin-top: 10px; */ /* Removed as we are putting it in a card */
 }
 .btn-wrapper {
     position: relative;
@@ -375,6 +375,17 @@ h1.shop-title-right {
     padding-left: 10px;
 }
 
+/* --- Added style for the new contact card --- */
+.contact-card {
+    background-color: #FFF0F5; /* Light pink background */
+    background-image: radial-gradient(#D7C2BC 1.2px, transparent 1.2px); /* Subtle polka dots */
+    background-size: 12px 12px;
+    border-radius: 20px;
+    padding: 15px; /* Slightly less padding to keep it tight */
+    border: 1px solid rgba(146, 115, 108, 0.1);
+    box-shadow: var(--card-shadow);
+}
+
 @media (max-width: 768px) {
     .browser-window { width: 95vw; height: auto; max-height: 90vh; aspect-ratio: auto; }
     .main-content { grid-template-columns: 1fr; }
@@ -444,18 +455,20 @@ h1.shop-title-right {
                 <div class="item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
             </div>
 
-            <div class="contact-container">
-                <div class="btn-wrapper" id="lineWrapper">
-                    <a href="javascript:void(0)" class="btn btn-main" style="width: 100%;" onclick="toggleContact('lineWrapper')">Contact Line</a>
-                    <div class="pop-label">melodyliz</div>
-                </div>
-                <div class="btn-wrapper" id="fbWrapper">
-                    <a href="javascript:void(0)" class="btn btn-main" style="width: 100%; background: #4a6ea8;" onclick="toggleContact('fbWrapper')">Contact Facebook</a>
-                    <div class="pop-img" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
-                        <img src="https://i.pinimg.com/564x/00/82/33/0082337a77e966967f8924b893278913.jpg" alt="fb-profile">
+            <div class="contact-card">
+                <div class="contact-container">
+                    <div class="btn-wrapper" id="lineWrapper">
+                        <a href="javascript:void(0)" class="btn btn-main" style="width: 100%;" onclick="toggleContact('lineWrapper')">Contact Line</a>
+                        <div class="pop-label">melodyliz</div>
                     </div>
+                    <div class="btn-wrapper" id="fbWrapper">
+                        <a href="javascript:void(0)" class="btn btn-main" style="width: 100%; background: #4a6ea8;" onclick="toggleContact('fbWrapper')">Contact Facebook</a>
+                        <div class="pop-img" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
+                            <img src="https://i.pinimg.com/564x/00/82/33/0082337a77e966967f8924b893278913.jpg" alt="fb-profile">
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline">Check Queue</a>
                 </div>
-                <a href="#" class="btn btn-outline">Check Queue</a>
             </div>
         </div>
 
@@ -557,3 +570,4 @@ h1.shop-title-right {
 
 </body>
 </html>
+
