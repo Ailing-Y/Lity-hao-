@@ -18,10 +18,11 @@
 
 body {
     background-color: var(--bg);
-    /* พื้นหลังแบบ Gradient ไล่สีนวลๆ ตามภาพ */
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(216, 241, 230, 0.46) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(255, 228, 235, 0.6) 0%, transparent 40%);
+    /* เพิ่มพื้นหลังรูปแบบน่ารักๆ (Pattern Background) */
+    /* เปลี่ยน 'pattern.png' เป็น URL ของรูปภาพพื้นหลังที่คุณต้องการ */
+    background-image: url('pattern.png'); 
+    background-repeat: repeat;
+    background-size: auto; /* หรือปรับขนาดตามความเหมาะสม */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,19 +67,19 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr; /* ปรับเป็น 1fr 1fr เพื่อให้ฝั่งซ้ายและขวาเท่ากัน */
+    gap: 30px; /* เพิ่มช่องว่างระหว่างคอลัมน์ */
     padding: 40px 30px;
     position: relative;
 }
 
-/* ฝั่งซ้าย: รูปภาพซ้อนกัน (Collage Style) */
+/* ฝั่งซ้าย: รูปภาพซ้อนกัน (Collage Style) ปรับปรุงให้ใหญ่ขึ้น ขอบมน และทับกัน */
 .left-column {
     position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    min-height: 450px;
+    align-items: center;
+    min-height: 500px; /* เพิ่มความสูงของฝั่งซ้าย */
 }
 
 .image-stack {
@@ -87,39 +88,39 @@ body {
     height: 100%;
 }
 
-/* รูปที่ 1 เอียงซ้าย */
+/* รูปที่ 1 เอียงซ้าย (อยู่ด้านล่าง) */
 .img-1 {
     position: absolute;
-    width: 240px;
-    height: 320px;
+    width: 280px; /* เพิ่มขนาดรูป */
+    height: 380px; /* เพิ่มความสูงของรูป */
     background: #fff;
-    padding: 10px;
-    box-shadow: 5px 10px 20px rgba(0,0,0,0.05);
-    transform: rotate(-5deg);
-    top: 0; left: 10px;
+    padding: 15px; /* เพิ่ม padding */
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.08); /* เพิ่มเงา */
+    transform: rotate(-10deg); /* เอียงมากขึ้น */
+    top: 20px; left: 20px; /* ปรับตำแหน่ง */
     z-index: 2;
-    border-radius: 5px;
+    border-radius: 15px; /* เพิ่มขอบมนมากขึ้น */
 }
 
-/* รูปที่ 2 เอียงขวา (ด้านล่าง) */
+/* รูปที่ 2 เอียงขวา (อยู่ด้านบน) */
 .img-2 {
     position: absolute;
-    width: 240px;
-    height: 300px;
+    width: 280px; /* เพิ่มขนาดรูป */
+    height: 360px; /* เพิ่มความสูงของรูป */
     background: #fff;
-    padding: 10px;
-    box-shadow: 5px 10px 20px rgba(0,0,0,0.05);
-    transform: rotate(4deg);
-    bottom: 20px; right: 20px;
+    padding: 15px; /* เพิ่ม padding */
+    box-shadow: 10px 15px 30px rgba(0,0,0,0.1); /* เพิ่มเงาให้ดูเด่นขึ้น */
+    transform: rotate(10deg); /* เอียงมากขึ้น */
+    bottom: 20px; right: 20px; /* ปรับตำแหน่ง */
     z-index: 3;
-    border-radius: 5px;
+    border-radius: 15px; /* เพิ่มขอบมนมากขึ้น */
 }
 
 .img-1 img, .img-2 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 10px; /* ขอบมนของรูปภาพ */
 }
 
 /* สติ๊กเกอร์ตกแต่ง */
@@ -203,9 +204,9 @@ h1 { color: var(--dark); font-size: 24px; margin-bottom: 5px; }
 /* มือถือ */
 @media (max-width: 768px) {
     .container { grid-template-columns: 1fr; padding: 20px; }
-    .left-column { min-height: 400px; align-items: center; }
-    .img-1 { width: 200px; height: 260px; left: 10%; }
-    .img-2 { width: 200px; height: 250px; right: 5%; bottom: 0; }
+    .left-column { min-height: 450px; align-items: center; }
+    .img-1 { width: 220px; height: 300px; left: 10%; top: 10px; }
+    .img-2 { width: 220px; height: 280px; right: 5%; bottom: 10px; }
 }
 </style>
 </head>
