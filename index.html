@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lityhao - Official Store</title>
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <style>
 :root {
     --bg: #FDF1F5; 
     --main: #92736C;
     --dark: #634a44;
     --white: #FFFFFF;
-    --window-bg: rgba(255, 255, 255, 0.6); /* ปรับความโปร่งใสให้เห็นลายพื้นหลังชัดขึ้น */
+    --window-bg: rgba(255, 255, 255, 0.6); 
     --card-shadow: 0 8px 25px rgba(146, 115, 108, 0.08);
 }
 
@@ -19,7 +20,6 @@
 
 body {
     background-color: var(--bg);
-    /* พื้นหลัง Pattern ของหน้าจอหลัก */
     background-image: radial-gradient(#f8d7da 1px, transparent 1px);
     background-size: 20px 20px;
     display: flex;
@@ -29,13 +29,13 @@ body {
     padding: 20px;
 }
 
-/* ปรับกรอบหน้าต่างเป็น 1:1 พร้อมใส่พื้นหลังภาพที่ส่งมา */
 .browser-window {
     width: 800px;
     aspect-ratio: 1 / 1;
+    /* แนะนำให้เตรียมไฟล์ image.png ลายสก็อตที่จางแล้วไว้ด้วยครับ */
     background: 
-        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), /* Layer สีขาวเพื่อให้ภาพดูอ่อนลง */
-        url('image.png'); /* ใส่ชื่อไฟล์ภาพลายสก็อตที่คุณส่งมาตรงนี้ */
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+        url('image.png'); 
     background-size: cover;
     background-position: center;
     backdrop-filter: blur(10px);
@@ -57,7 +57,10 @@ body {
     border-bottom: 1px solid rgba(0,0,0,0.03);
     z-index: 5;
 }
-.dot { width: 10px; height: 10px; background: #EBCBC4; border-radius: 50%; }
+
+/* ปรับเปลี่ยนวงกลมฝั่งซ้ายบนเป็นสีชมพูอ่อนที่เลือกไว้ */
+.dot { width: 10px; height: 10px; background: #FCE4EC; border-radius: 50%; }
+
 .address-bar {
     flex: 1;
     background: #fff;
@@ -79,18 +82,30 @@ body {
     z-index: 2;
 }
 
-/* ฝั่งซ้าย: รูปภาพ Collage */
 .left-column {
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* ปรับเป็น column เพื่อวางชื่อร้านด้านบน */
+    justify-content: flex-start; /* วางชื่อร้านชิดบน */
     align-items: center;
+    padding-top: 10px;
+}
+
+/* สไตล์ชื่อร้านตัวใหญ่ ฟอนต์ Pacifico */
+.shop-title-large {
+    font-family: 'Pacifico', cursive;
+    font-size: 60px;
+    color: var(--main);
+    text-align: center;
+    margin-bottom: -15px; /* ลดระยะห่างด้านล่าง */
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(146, 115, 108, 0.1);
 }
 
 .image-stack {
     position: relative;
     width: 100%;
-    height: 80%;
+    height: 70%; /* ปรับความสูงลงเล็กน้อย */
+    /* ไม่ต้องใช้ margin-top แล้วเพราะใช้ column layout */
 }
 
 .img-box {
@@ -103,16 +118,16 @@ body {
 }
 
 .img-1 {
-    width: 220px; height: 280px;
+    width: 200px; height: 260px; /* ปรับขนาดเล็กน้อยเพื่อให้พอดี */
     transform: rotate(-8deg);
-    top: 10%; left: 5%;
+    top: 5%; left: 5%; /* ปรับตำแหน่ง */
     z-index: 1;
 }
 
 .img-2 {
-    width: 220px; height: 260px;
+    width: 200px; height: 240px; /* ปรับขนาดเล็กน้อย */
     transform: rotate(6deg);
-    bottom: 15%; right: 5%;
+    bottom: 5%; right: 5%; /* ปรับตำแหน่ง */
     z-index: 2;
 }
 
@@ -122,7 +137,6 @@ body {
     border-radius: 12px;
 }
 
-/* ฝั่งขวา: ปรับเป็นช่องๆ (Card Style) */
 .right-column {
     display: flex;
     flex-direction: column;
@@ -135,14 +149,14 @@ body {
 .right-column::-webkit-scrollbar-thumb { background: #EBCBC4; border-radius: 10px; }
 
 .info-card {
-    background: rgba(255, 255, 255, 0.95); /* ให้ Card ทึบกว่าพื้นหลังเล็กน้อยเพื่อให้อ่านง่าย */
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     padding: 20px;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
-h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
+h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; font-family: 'Pacifico', cursive; } /* ใช้ฟอนต์น่ารักใน Card ด้วย */
 .desc { font-size: 12px; color: var(--main); margin-bottom: 10px; }
 
 .section-title {
@@ -185,7 +199,8 @@ h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
     .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
     .left-column { min-height: 350px; }
-    .img-1, .img-2 { width: 180px; height: 230px; }
+    .img-1, .img-2 { width: 160px; height: 200px; }
+    .shop-title-large { font-size: 40px; margin-bottom: 0; }
 }
 </style>
 </head>
@@ -194,13 +209,13 @@ h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
 <div class="browser-window">
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        <div class="address-bar">lityhao.store/home</div>
-        <div style="font-size: 11px; color: #999; font-weight: 500;">EXIT</div>
+        <div class="address-bar">around-lityhao.here</div> <div style="font-size: 11px; color: #999; font-weight: 500;">EXIT</div>
     </div>
 
     <div class="main-content">
         <div class="left-column">
-            <img src="https://cdn-icons-png.flaticon.com/512/594/594846.png" class="sticker" style="top: 5%; left: 0; width: 50px;">
+            <h1 class="shop-title-large">Around here</h1>
+            
             <div class="image-stack">
                 <div class="img-box img-1">
                     <img src="logo.jpg" alt="Work 1">
@@ -209,7 +224,6 @@ h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
                     <img src="logo.jpg" alt="Work 2">
                 </div>
             </div>
-            <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="sticker" style="bottom: 10%; left: 5%; width: 40px; transform: rotate(-20deg);">
         </div>
 
         <div class="right-column">
