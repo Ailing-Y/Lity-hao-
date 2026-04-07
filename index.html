@@ -8,20 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg: #FDF1F5; 
-    --main: #92736C;
-    --dark: #634a44;
+    --bg-light: #FFFBFB; 
+    --main-brown: #92736C;
+    --dark-brown: #634a44;
     --white: #FFFFFF;
-    --window-bg: rgba(255, 255, 255, 0.6); 
-    --card-shadow: 0 8px 25px rgba(146, 115, 108, 0.08);
+    /* โทนสีละมุนใหม่ */
+    --soft-pink-polka: #FFEDF1; /* สีชมพูอ่อนลายจุด */
+    --accent-pink: #FCE4EC;
+    --window-bg: rgba(255, 255, 255, 0.7); 
+    --card-shadow: 0 10px 30px rgba(146, 115, 108, 0.06);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
 
 body {
-    background-color: var(--bg);
-    background-image: radial-gradient(#f8d7da 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-color: var(--bg-light);
+    /* พื้นหลังหลักเป็นลายจุดอ่อนๆ */
+    background-image: radial-gradient(#FFEDF1 1.5px, transparent 1.5px);
+    background-size: 25px 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,18 +34,17 @@ body {
 }
 
 .browser-window {
-    width: 800px;
+    width: 850px;
     aspect-ratio: 1 / 1;
-    /* แนะนำให้เตรียมไฟล์ image.png ลายสก็อตที่จางแล้วไว้ด้วยครับ */
     background: 
-        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
-        url('image.png'); 
+        linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
+        url('image.png'); /* เปลี่ยนเป็นชื่อไฟล์ลายสก็อตจางของคุณ */
     background-size: cover;
     background-position: center;
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.9);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 35px;
+    border: 2px solid var(--white);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.06);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -50,91 +53,97 @@ body {
 
 .browser-header {
     background: rgba(255,255,255,0.9);
-    padding: 15px 25px;
+    padding: 18px 25px;
     display: flex;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-    z-index: 5;
+    border-bottom: 1px solid rgba(146, 115, 108, 0.08);
 }
-
-/* ปรับเปลี่ยนวงกลมฝั่งซ้ายบนเป็นสีชมพูอ่อนที่เลือกไว้ */
-.dot { width: 10px; height: 10px; background: #FCE4EC; border-radius: 50%; }
-
+.dot { width: 10px; height: 10px; background: var(--accent-pink); border-radius: 50%; }
 .address-bar {
     flex: 1;
     background: #fff;
     border-radius: 20px;
     padding: 6px 15px;
-    font-size: 12px;
-    color: #B8A39E;
+    font-size: 13px;
+    color: var(--main-brown);
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(146, 115, 108, 0.05);
 }
 
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 30px;
+    gap: 25px;
+    padding: 40px;
     flex: 1;
     overflow: hidden;
-    z-index: 2;
 }
 
 .left-column {
     position: relative;
     display: flex;
-    flex-direction: column; /* ปรับเป็น column เพื่อวางชื่อร้านด้านบน */
-    justify-content: flex-start; /* วางชื่อร้านชิดบน */
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
-/* สไตล์ชื่อร้านตัวใหญ่ ฟอนต์ Pacifico */
+/* สไตล์ชื่อร้าน Lityhao ตัวใหญ่ สไตล์ Vintage/Retro */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
-    font-size: 60px;
-    color: var(--main);
+    font-size: 65px;
+    color: var(--main-brown);
     text-align: center;
-    margin-bottom: -15px; /* ลดระยะห่างด้านล่าง */
-    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(146, 115, 108, 0.1);
+    margin-bottom: -15px; 
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(146, 115, 108, 0.08);
 }
 
+/* สไตล์ดาวตกแต่งที่ห้อยลงมาตามรูป */
+.deco-elements {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 10px;
+}
+
+/* ปรับที่ใส่รูปให้ใหญ่ขึ้นเล็กน้อย ขอบมน */
 .image-stack {
     position: relative;
     width: 100%;
-    height: 70%; /* ปรับความสูงลงเล็กน้อย */
-    /* ไม่ต้องใช้ margin-top แล้วเพราะใช้ column layout */
+    height: 75%; 
+    margin-top: 20px;
 }
 
 .img-box {
     position: absolute;
     background: #fff;
-    padding: 12px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 25px;
     box-shadow: var(--card-shadow);
     overflow: hidden;
 }
 
 .img-1 {
-    width: 200px; height: 260px; /* ปรับขนาดเล็กน้อยเพื่อให้พอดี */
-    transform: rotate(-8deg);
-    top: 5%; left: 5%; /* ปรับตำแหน่ง */
+    width: 250px; height: 340px; 
+    transform: rotate(-7deg);
+    top: 5%; left: 0; 
     z-index: 1;
 }
 
 .img-2 {
-    width: 200px; height: 240px; /* ปรับขนาดเล็กน้อย */
-    transform: rotate(6deg);
-    bottom: 5%; right: 5%; /* ปรับตำแหน่ง */
+    width: 250px; height: 320px; 
+    transform: rotate(5deg);
+    bottom: 5%; right: 0; 
     z-index: 2;
+    border: 1px solid var(--accent-pink);
 }
 
 .img-box img {
     width: 100%; height: 100%;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 15px;
 }
 
 .right-column {
@@ -142,65 +151,81 @@ body {
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
-    padding-right: 5px;
+    padding-right: 8px;
 }
 
-.right-column::-webkit-scrollbar { width: 4px; }
-.right-column::-webkit-scrollbar-thumb { background: #EBCBC4; border-radius: 10px; }
+.right-column::-webkit-scrollbar { width: 5px; }
+.right-column::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
 
+/* ปรับ Info Card ให้เป็นสีชมพูลายจุดอ่อนๆ */
 .info-card {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 20px;
+    background-image: radial-gradient(#FFEDF1 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+    border-radius: 25px;
+    padding: 25px;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
-h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; font-family: 'Pacifico', cursive; } /* ใช้ฟอนต์น่ารักใน Card ด้วย */
-.desc { font-size: 12px; color: var(--main); margin-bottom: 10px; }
+h1 { color: var(--main-brown); font-size: 24px; margin-bottom: 5px; font-family: 'Pacifico', cursive; } 
+.desc { font-size: 13px; color: var(--dark-brown); margin-bottom: 12px; }
 
 .section-title {
-    font-size: 14px;
-    color: var(--dark);
+    font-size: 15px;
+    color: var(--dark-brown);
     font-weight: 500;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-left: 3px solid var(--main);
-    padding-left: 10px;
+    gap: 10px;
+}
+.section-title::after {
+    content: "";
+    flex: 1; height: 1px; background: var(--accent-pink);
 }
 
-.item {
+.step-item {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    font-size: 13px;
-    color: var(--dark);
-    border-bottom: 1px solid #fcf2f4;
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--dark-brown);
+    border-bottom: 1px dashed var(--accent-pink);
+}
+
+/* คำโปรยด้านล่าง Card */
+.creative-tagline {
+    font-size: 12px;
+    color: var(--main-brown);
+    text-align: center;
+    margin-top: 15px;
+    line-height: 1.6;
+    font-style: italic;
+    letter-spacing: 0.5px;
 }
 
 .btn {
     display: block;
     text-align: center;
-    padding: 10px;
-    border-radius: 15px;
+    padding: 12px;
+    border-radius: 20px;
     text-decoration: none;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     transition: 0.3s;
 }
-.btn-main { background: var(--main); color: #fff; margin-top: 5px; }
-.btn-outline { border: 1.5px dashed var(--main); color: var(--main); background: rgba(255,255,255,0.8); }
+.btn-main { background: var(--main-brown); color: #fff; margin-top: 10px; }
+.btn-outline { border: 1.5px dashed var(--main-brown); color: var(--main-brown); background: rgba(255,255,255,0.8); }
 
 .sticker { position: absolute; pointer-events: none; z-index: 10; }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
-    .left-column { min-height: 350px; }
-    .img-1, .img-2 { width: 160px; height: 200px; }
-    .shop-title-large { font-size: 40px; margin-bottom: 0; }
+    .left-column { min-height: 450px; }
+    .img-1, .img-2 { width: 200px; height: 280px; }
+    .shop-title-large { font-size: 45px; margin-bottom: 0; }
 }
 </style>
 </head>
@@ -209,52 +234,60 @@ h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; font-family: 'Paci
 <div class="browser-window">
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        <div class="address-bar">around-lityhao.here</div> <div style="font-size: 11px; color: #999; font-weight: 500;">EXIT</div>
+        <div class="address-bar">www.lityhao-vibes.here</div> <div style="font-size: 11px; color: var(--main-brown); font-weight: 500;">EXIT</div>
     </div>
 
     <div class="main-content">
         <div class="left-column">
-            <h1 class="shop-title-large">Around here</h1>
+            <h1 class="shop-title-large">Lityhao</h1>
             
+            <div class="deco-elements">
+                <img src="path_to_star_deco.png" alt="Star Deco" style="max-width: 300px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/594/594846.png" class="sticker" style="top: -15px; left: 10%; width: 50px;">
+            </div>
+
             <div class="image-stack">
                 <div class="img-box img-1">
-                    <img src="logo.jpg" alt="Work 1">
+                    <img src="logo.jpg" alt="Work Sample 1">
                 </div>
                 <div class="img-box img-2">
-                    <img src="logo.jpg" alt="Work 2">
+                    <img src="logo.jpg" alt="Work Sample 2">
                 </div>
             </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="sticker" style="bottom: 10%; right: 10%; width: 50px; transform: rotate(15deg);">
         </div>
 
         <div class="right-column">
             <div class="info-card">
                 <h1>Lityhao 🎀</h1>
-                <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า</p>
-                <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-                    <span style="background: #FDF1F5; font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main);">ARTWORK</span>
-                    <span style="background: #FDF1F5; font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main);">DESIGN</span>
+                <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า เค้าใจดีมากค่ะ ♡</p>
+                <div style="display: flex; gap: 6px;">
+                    <span style="background: var(--accent-pink); color: var(--main-brown); font-size: 10px; padding: 4px 12px; border-radius: 20px;">ARTWORK</span>
+                    <span style="background: var(--accent-pink); color: var(--main-brown); font-size: 10px; padding: 4px 12px; border-radius: 20px;">DESIGN</span>
                 </div>
             </div>
 
             <div class="info-card">
-                <div class="section-title">📋 Ordering Steps</div>
-                <div class="item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
-                <div class="item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
-                <div class="item"><span>3. ส่งบรีฟ/รอรับงาน</span><span>📏</span></div>
+                <div class="section-title">📋 ขั้นตอนการสั่ง</div>
+                <div class="step-item"><span>1. ทักสอบถาม/บรีฟงาน</span><span>✨</span></div>
+                <div class="step-item"><span>2. โอนเงินเต็มจำนวน</span><span>💰</span></div>
+                <div class="step-item"><span>3. ส่งบรีฟงาน & รอรับ</span><span>🕒</span></div>
             </div>
 
             <div class="info-card">
-                <div class="section-title">📍 Store Rules</div>
-                <div class="item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
-                <div class="item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
+                <div class="section-title">📍 กฎของร้าน</div>
+                <div class="step-item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
+                <div class="step-item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 10px;">
+            <p class="creative-tagline">" วาดความฝัน ถักทอจินตนาการ <br> ให้งานดีไซน์เล่าเรื่องราวในแบบของคุณเอง ♡ "</p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
                 <a href="https://line.me/ti/p/~melodyliz" class="btn btn-main">Contact Line</a>
-                <a href="#" class="btn btn-outline">Check Queue</a>
+                <a href="#" class="btn btn-outline">Check Portfolio</a>
             </div>
 
-            <p style="text-align: center; font-size: 10px; color: #634a44; margin-top: 10px; font-weight: 500;">© 2026 Lityhao Store</p>
+            <p style="text-align: center; font-size: 10px; color: var(--main-brown); margin-top: 15px; font-weight: 500;">© 2026 Lityhao Store</p>
         </div>
     </div>
 </div>
