@@ -269,7 +269,6 @@ body {
     color: var(--dark-brown);
 }
 
-/* --- Redesigned Contact Section --- */
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -296,7 +295,7 @@ body {
     text-decoration: none;
     font-size: 12px;
     font-weight: 600;
-    color: var(--light-brown-outline); /* Soft Brown Text */
+    color: var(--light-brown-outline); 
     padding: 8px 5px;
     width: 100%;
     text-align: center;
@@ -312,28 +311,33 @@ body {
     box-shadow: 0 5px 10px rgba(146, 115, 108, 0.1);
 }
 
+/* --- Redesigned Line Pop-label --- */
 .pop-label-mini {
     position: absolute;
     bottom: 110%;
     background: var(--white);
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 10px;
+    /* Made bigger */
+    padding: 8px 20px; 
+    border-radius: 12px;
+    /* Font made bigger */
+    font-size: 14px; 
     color: var(--main-brown);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     opacity: 0;
     transform: translateY(10px);
-    transition: 0.3s;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Nicer pop animation */
     white-space: nowrap;
     pointer-events: none;
     border: 1px solid var(--polka-dot);
+    font-weight: 500;
 }
 
 .pop-img-mini {
     position: absolute;
     bottom: 110%;
-    width: 50px;
-    height: 50px;
+    /* Standard size for mini popups */
+    width: 60px;
+    height: 60px;
     background: var(--white);
     padding: 3px;
     border-radius: 10px;
@@ -345,7 +349,7 @@ body {
     border: 1px solid var(--polka-dot);
 }
 
-.pop-img-mini img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+.pop-img-mini img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
 
 .contact-card-mini.active .pop-label-mini,
 .contact-card-mini.active .pop-img-mini {
@@ -475,12 +479,12 @@ h1.shop-title-right {
 
             <div class="contact-grid">
                 <div class="contact-card-mini" id="lineCard">
-                    <div class="pop-label-mini">melodyliz</div>
+                    <div class="pop-label-mini">Melodyliz</div>
                     <div class="contact-btn" onclick="toggleContactMini('lineCard')">LINE</div>
                 </div>
                 <div class="contact-card-mini" id="fbCard">
                     <div class="pop-img-mini" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
-                        <img src="https://i.pinimg.com/564x/00/82/33/0082337a77e966967f8924b893278913.jpg" alt="fb-profile">
+                        <img src="IMG_5370.jpeg" alt="fb-profile-regina">
                     </div>
                     <div class="contact-btn" onclick="toggleContactMini('fbCard')">FACEBOOK</div>
                 </div>
