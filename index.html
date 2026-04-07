@@ -15,7 +15,6 @@
     --white: #FFFFFF;
     --accent-pink: #FCE4EC;
     --polka-dot: #FFEDF1;
-    --window-bg: rgba(255, 255, 255, 0.75); 
     --card-shadow: 0 10px 30px rgba(146, 115, 108, 0.06);
 }
 
@@ -35,11 +34,7 @@ body {
 .browser-window {
     width: 800px;
     aspect-ratio: 1 / 1;
-    background: 
-        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
-        url('image.png'); 
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)); 
     backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.9);
@@ -150,22 +145,16 @@ body {
     position: relative;
     z-index: 2;
     margin-top: -5px; 
-    filter: drop-shadow(0 4px 6px rgba(146, 115, 108, 0.08));
 }
 
 .hanging-star.mid::before { height: 40px; }
-.hanging-star.mid .star-bubble { 
-    font-size: 44px; 
-    width: 58px; 
-    height: 58px; 
-}
+.hanging-star.mid .star-bubble { font-size: 44px; width: 58px; height: 58px; }
 
-/* ส่วนของ Image Stack แบบเลื่อนได้ */
+/* Image Stack - ปรับความเร็วการเปลี่ยนให้นุ่มนวลขึ้น */
 .image-stack {
     position: relative;
     width: 100%;
     height: 300px;
-    cursor: pointer;
     margin-top: 20px;
 }
 
@@ -175,9 +164,10 @@ body {
     padding: 12px;
     border-radius: 20px;
     box-shadow: var(--card-shadow);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1); /* ขยับช้าๆ */
     width: 200px;
     height: 250px;
+    opacity: 0;
 }
 
 .img-box img {
@@ -186,22 +176,49 @@ body {
     border-radius: 12px;
 }
 
-/* ตำแหน่งตั้งต้นของ 2 รูปที่โชว์ */
+/* ตำแหน่งสำหรับรูปที่โชว์ */
 .img-pos-1 { 
-    transform: rotate(-8deg); 
+    transform: rotate(-8deg) scale(1); 
     top: 0; left: 15%; 
     z-index: 5; 
+    opacity: 1;
 }
 .img-pos-2 { 
-    transform: rotate(6deg); 
+    transform: rotate(6deg) scale(0.95); 
     top: 20px; left: 35%; 
     z-index: 4; 
+    opacity: 0.8;
 }
 .img-hidden { 
     opacity: 0; 
-    transform: scale(0.8) rotate(0); 
-    top: 50px; left: 25%;
+    transform: rotate(0) scale(0.8); 
+    top: 40px; left: 25%;
     z-index: 1; 
+}
+
+/* สัญลักษณ์ลูกศรเลื่อนด้านล่าง */
+.scroll-indicator {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--light-brown-outline);
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.arrow-line {
+    width: 40px;
+    height: 1px;
+    border-top: 1.5px dashed var(--light-brown-outline);
+    position: relative;
+}
+
+.arrow-line::after {
+    content: "˃";
+    position: absolute;
+    right: -2px;
+    top: -10px;
 }
 
 .right-column {
@@ -280,7 +297,6 @@ h1.shop-title-right {
 @media (max-width: 768px) {
     .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
-    .shop-title-large { font-size: 45px; }
 }
 </style>
 </head>
@@ -304,9 +320,14 @@ h1.shop-title-right {
                 <div class="hanging-star side"><div class="star-bubble">★</div></div>
             </div>
             
-            <div class="image-stack" id="imageStack" onclick="nextImage()">
+            <div class="image-stack" id="imageStack">
                 </div>
-            <p style="font-size: 10px; color: var(--main-brown); margin-top: 10px; opacity: 0.6;">(Click to slide next ♡)</p>
+
+            <div class="scroll-indicator">
+                <div class="arrow-line"></div>
+                <span style="font-size: 11px;">slide</span>
+                <div class="arrow-line" style="transform: scaleX(-1);"></div>
+            </div>
         </div>
 
         <div class="right-column">
@@ -344,7 +365,6 @@ h1.shop-title-right {
 </div>
 
 <script>
-    // รายชื่อไฟล์ภาพทั้งหมด
     const images = [
         "♡︎_O6_♡︎_20260316133921.jpeg", "♡︎_O6_♡︎_20260316133909.jpeg", "♡︎_O6_♡︎_20260316133900.jpeg", 
         "♡︎_O6_♡︎_20260316133850.jpeg", "♡︎_O6_♡︎_20260316133840.jpeg", "♡︎_O6_♡︎_20260316133830.jpeg", 
@@ -361,7 +381,6 @@ h1.shop-title-right {
     let currentIndex = 0;
     const container = document.getElementById('imageStack');
 
-    // ฟังก์ชันสร้าง Element ของรูปภาพ
     function initStack() {
         container.innerHTML = '';
         images.forEach((src, index) => {
@@ -374,30 +393,33 @@ h1.shop-title-right {
         updateClasses();
     }
 
-    // ฟังก์ชันอัปเดตตำแหน่ง Class (ทับซ้อน)
     function updateClasses() {
         images.forEach((_, index) => {
             const el = document.getElementById(`img-${index}`);
-            el.className = 'img-box img-hidden'; // ซ่อนไว้ก่อน
-            
-            // รูปปัจจุบัน (บนสุด)
+            // รูปที่ 1 (บนสุด)
             if (index === currentIndex) {
                 el.className = 'img-box img-pos-1';
             } 
-            // รูปถัดไป (ซ้อนหลัง)
+            // รูปที่ 2 (ซ้อนหลัง)
             else if (index === (currentIndex + 1) % images.length) {
                 el.className = 'img-box img-pos-2';
+            }
+            // รูปอื่นๆ (ซ่อน)
+            else {
+                el.className = 'img-box img-hidden';
             }
         });
     }
 
-    // ฟังก์ชันเมื่อคลิก
     function nextImage() {
         currentIndex = (currentIndex + 1) % images.length;
         updateClasses();
     }
 
+    // เริ่มทำงาน
     initStack();
+    // ตั้งค่าเลื่อนวนอัตโนมัติ ทุก 3.5 วินาที เพื่อให้เห็นการขยับช้าๆ นุ่มๆ
+    setInterval(nextImage, 3500);
 </script>
 
 </body>
