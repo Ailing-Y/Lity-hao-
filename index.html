@@ -233,7 +233,6 @@ body {
     border: 1px solid rgba(146, 115, 108, 0.03);
 }
 
-/* --- New CSS for Steps --- */
 .steps-wrapper {
     display: flex;
     flex-direction: column;
@@ -270,60 +269,88 @@ body {
     color: var(--dark-brown);
 }
 
-/* --- New CSS for Social Popups --- */
-.contact-container {
-    position: relative;
+/* --- Redesigned Contact Section --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.contact-card-mini {
+    background-color: #FFF0F5; 
+    background-image: radial-gradient(#D7C2BC 1.2px, transparent 1.2px);
+    background-size: 12px 12px;
+    border-radius: 18px;
+    padding: 12px;
+    border: 1px solid rgba(146, 115, 108, 0.1);
+    box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    /* margin-top: 10px; */ /* Removed as we are putting it in a card */
-}
-.btn-wrapper {
-    position: relative;
-    display: flex;
     align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
 }
-.pop-label {
-    position: absolute;
-    left: 105%;
-    background: white;
-    padding: 5px 15px;
-    border-radius: 10px;
+
+.contact-btn {
+    text-decoration: none;
     font-size: 12px;
+    font-weight: 600;
+    color: var(--light-brown-outline); /* Soft Brown Text */
+    padding: 8px 5px;
+    width: 100%;
+    text-align: center;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid rgba(184, 163, 158, 0.2);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(146, 115, 108, 0.1);
+}
+
+.pop-label-mini {
+    position: absolute;
+    bottom: 110%;
+    background: var(--white);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 10px;
     color: var(--main-brown);
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateY(10px);
     transition: 0.3s;
     white-space: nowrap;
     pointer-events: none;
     border: 1px solid var(--polka-dot);
 }
-.pop-img {
+
+.pop-img-mini {
     position: absolute;
-    left: 105%;
-    width: 60px;
-    height: 60px;
-    background: white;
-    padding: 4px;
-    border-radius: 12px;
+    bottom: 110%;
+    width: 50px;
+    height: 50px;
+    background: var(--white);
+    padding: 3px;
+    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateY(10px);
     transition: 0.3s;
     cursor: pointer;
     border: 1px solid var(--polka-dot);
 }
-.pop-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-}
-.btn-wrapper.active .pop-label,
-.btn-wrapper.active .pop-img {
+
+.pop-img-mini img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+
+.contact-card-mini.active .pop-label-mini,
+.contact-card-mini.active .pop-img-mini {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
     pointer-events: auto;
 }
 
@@ -373,17 +400,6 @@ h1.shop-title-right {
     gap: 8px;
     border-left: 3px solid var(--main-brown);
     padding-left: 10px;
-}
-
-/* --- Added style for the new contact card --- */
-.contact-card {
-    background-color: #FFF0F5; /* Light pink background */
-    background-image: radial-gradient(#D7C2BC 1.2px, transparent 1.2px); /* Subtle polka dots */
-    background-size: 12px 12px;
-    border-radius: 20px;
-    padding: 15px; /* Slightly less padding to keep it tight */
-    border: 1px solid rgba(146, 115, 108, 0.1);
-    box-shadow: var(--card-shadow);
 }
 
 @media (max-width: 768px) {
@@ -451,23 +467,22 @@ h1.shop-title-right {
 
             <div class="info-card">
                 <div class="section-title">📍 Store Rules</div>
-                <div class="item"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
-                <div class="item"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
+                <div style="font-size: 13px; color: var(--dark-brown); display: flex; flex-direction: column; gap: 5px;">
+                    <div style="display: flex; justify-content: space-between;"><span>ยกเลิกไม่คืนเงินนะคะ</span><span>❌</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span>ทักถามอย่างสุภาพน้า</span><span>💌</span></div>
+                </div>
             </div>
 
-            <div class="contact-card">
-                <div class="contact-container">
-                    <div class="btn-wrapper" id="lineWrapper">
-                        <a href="javascript:void(0)" class="btn btn-main" style="width: 100%;" onclick="toggleContact('lineWrapper')">Contact Line</a>
-                        <div class="pop-label">melodyliz</div>
+            <div class="contact-grid">
+                <div class="contact-card-mini" id="lineCard">
+                    <div class="pop-label-mini">melodyliz</div>
+                    <div class="contact-btn" onclick="toggleContactMini('lineCard')">LINE</div>
+                </div>
+                <div class="contact-card-mini" id="fbCard">
+                    <div class="pop-img-mini" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
+                        <img src="https://i.pinimg.com/564x/00/82/33/0082337a77e966967f8924b893278913.jpg" alt="fb-profile">
                     </div>
-                    <div class="btn-wrapper" id="fbWrapper">
-                        <a href="javascript:void(0)" class="btn btn-main" style="width: 100%; background: #4a6ea8;" onclick="toggleContact('fbWrapper')">Contact Facebook</a>
-                        <div class="pop-img" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
-                            <img src="https://i.pinimg.com/564x/00/82/33/0082337a77e966967f8924b893278913.jpg" alt="fb-profile">
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-outline">Check Queue</a>
+                    <div class="contact-btn" onclick="toggleContactMini('fbCard')">FACEBOOK</div>
                 </div>
             </div>
         </div>
@@ -495,7 +510,6 @@ h1.shop-title-right {
 </div>
 
 <script>
-    // --- Existing Image Stack Logic ---
     const images = [
         "♡︎_O6_♡︎_20260316133921.jpeg", "♡︎_O6_♡︎_20260316133909.jpeg", "♡︎_O6_♡︎_20260316133900.jpeg", 
         "♡︎_O6_♡︎_20260316133850.jpeg", "♡︎_O6_♡︎_20260316133840.jpeg", "♡︎_O6_♡︎_20260316133830.jpeg", 
@@ -552,17 +566,16 @@ h1.shop-title-right {
         if (Math.abs(diff) > 30) { if (diff > 0) nextImage(); else prevImage(); }
     }
 
-    // --- New Toggle Function for Contact ---
-    function toggleContact(id) {
-        const line = document.getElementById('lineWrapper');
-        const fb = document.getElementById('fbWrapper');
-        if (id === 'lineWrapper') {
-            line.classList.toggle('active');
-            fb.classList.remove('active');
-        } else {
-            fb.classList.toggle('active');
-            line.classList.remove('active');
-        }
+    // --- Updated Toggle Function for Mini Contact ---
+    function toggleContactMini(id) {
+        const target = document.getElementById(id);
+        const allCards = document.querySelectorAll('.contact-card-mini');
+        
+        allCards.forEach(card => {
+            if (card.id !== id) card.classList.remove('active');
+        });
+        
+        target.classList.toggle('active');
     }
 
     initStack();
@@ -570,4 +583,3 @@ h1.shop-title-right {
 
 </body>
 </html>
-
