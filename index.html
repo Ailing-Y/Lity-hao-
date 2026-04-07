@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Lityhao - Official Store</title>
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -22,7 +22,6 @@
 
 body {
     background-color: var(--bg-light);
-    /* เปลี่ยนลายเส้นตรงเป็นสีชมพูอ่อนสลับสีขาว */
     background: repeating-linear-gradient(
         90deg,
         var(--accent-pink),
@@ -35,17 +34,15 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    overflow: hidden;
+    overflow-x: hidden; /* ป้องกันการเลื่อนซ้ายขวาที่ระดับ Body */
     position: relative;
 }
 
-/* ดาวระยิบระยับพื้นหลัง ปรับเป็นสีน้ำตาลและมีเงา */
 .bg-star {
     position: absolute;
     color: var(--main-brown);
     font-size: 14px;
     opacity: 0.6;
-    /* เพิ่มเงาให้ดาว */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
     animation: starRotate 25s linear infinite;
     pointer-events: none;
@@ -102,6 +99,7 @@ body {
     padding: 30px;
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden; /* ตรึงเนื้อหาไม่ให้ไหลออกข้าง */
 }
 
 .main-content::-webkit-scrollbar { width: 6px; }
@@ -446,16 +444,14 @@ h1.shop-title-right {
     padding-left: 10px;
 }
 
-/* Custom Heart Shape */
 .heart-icon {
     width: 16px;
     height: 16px;
-    fill: #FFB7C5; /* Light Pink */
+    fill: #FFB7C5; 
     display: inline-block;
     vertical-align: middle;
 }
 
-/* Decoration for right column */
 .right-deco-area {
     display: flex;
     justify-content: center;
@@ -463,10 +459,73 @@ h1.shop-title-right {
     margin-top: 5px;
 }
 
-@media (max-width: 768px) {
-    .browser-window { width: 95vw; height: auto; max-height: 90vh; aspect-ratio: auto; }
-    .main-content { grid-template-columns: 1fr; }
-    .bottom-info-section { grid-template-columns: 1fr; }
+/* ============================================================
+   RESPONSIVE LOGIC (ตรึงขนาดและปรับให้พอดีหน้าจอโทรศัพท์)
+   ============================================================ */
+
+/* สำหรับ iPad และแท็บเล็ต (หน้าจอกว้าง 600px - 1024px) - คงเดิม */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .browser-window {
+        width: 90vw;
+        max-width: 800px;
+    }
+}
+
+/* สำหรับโทรศัพท์มือถือ (หน้าจอขนาดเล็กกว่า 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* ลดระยะขอบรอบนอก */
+    }
+
+    .browser-window {
+        width: 100%; /* ตรึงเต็มกว้างจอ */
+        height: 92vh; /* ปรับความสูงให้เกือบเต็มหน้าจอ */
+        aspect-ratio: auto; /* ยกเลิก 1:1 เพื่อให้เลื่อนดูเนื้อหาภายในได้พอดี */
+        border-radius: 20px;
+    }
+
+    .browser-header {
+        padding: 10px 15px;
+    }
+
+    .main-content {
+        grid-template-columns: 1fr; /* เปลี่ยนเป็นคอลัมน์เดียว */
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .shop-title-large {
+        font-size: 48px; /* ลดขนาดหัวข้อ */
+    }
+
+    .image-stack {
+        height: 220px; /* ลดความสูงของสแต็กรูปภาพ */
+        margin-top: 10px;
+    }
+
+    .img-box {
+        width: 150px; /* ลดขนาดรูปภาพลง */
+        height: 190px;
+        left: 25% !important; /* จัดตำแหน่งกึ่งกลาง */
+    }
+
+    .bottom-info-section {
+        grid-template-columns: 1fr; /* คอลัมน์เดียวในส่วนล่าง */
+    }
+
+    .pink-polka-box {
+        padding: 15px;
+        font-size: 13px;
+    }
+
+    .info-card {
+        padding: 15px;
+    }
+
+    /* จัดการช่อง 1:1 ของ Contact ให้ไม่เบียดกันเกินไป */
+    .contact-grid {
+        gap: 8px;
+    }
 }
 </style>
 </head>
@@ -585,7 +644,6 @@ h1.shop-title-right {
 </div>
 
 <script>
-    // สร้างดาวประดับพื้นหลัง
     function createBgStars() {
         const container = document.getElementById('starContainer');
         for (let i = 0; i < 35; i++) {
@@ -594,7 +652,6 @@ h1.shop-title-right {
             star.innerText = '★';
             star.style.left = Math.random() * 100 + 'vw';
             star.style.top = Math.random() * 100 + 'vh';
-            // สุ่มความล่าช้าของอนิเมชั่นและขนาดของดาว
             star.style.animationDelay = Math.random() * 15 + 's';
             star.style.fontSize = (Math.random() * 10 + 10) + 'px';
             container.appendChild(star);
@@ -661,28 +718,16 @@ h1.shop-title-right {
     function toggleContactMini(id) {
         const target = document.getElementById(id);
         const allCards = document.querySelectorAll('.contact-card-mini');
-        
-        allCards.forEach(card => {
-            if (card.id !== id) card.classList.remove('active');
-        });
-        
+        allCards.forEach(card => { if (card.id !== id) card.classList.remove('active'); });
         target.classList.toggle('active');
     }
 
-    // Function: Copy ID and show notice at the bottom
     function copyAndToggle(id, text) {
         navigator.clipboard.writeText(text).then(() => {
             const card = document.getElementById(id);
-            
-            // Show pop-label above
             toggleContactMini(id);
-            
-            // Show "COPIED" notice below
             card.classList.add('copied');
-            
-            setTimeout(() => {
-                card.classList.remove('copied');
-            }, 2000);
+            setTimeout(() => { card.classList.remove('copied'); }, 2000);
         }).catch(err => {
             console.error('Failed to copy: ', err);
             toggleContactMini(id);
