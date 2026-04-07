@@ -89,22 +89,15 @@ body {
     padding-top: 10px;
 }
 
-/* ปรับปรุงชื่อร้าน: เอาลายออก, กลับมาใช้สีน้ำตาล, ใส่ขอบชมพูอ่อนแบบห่างๆฟุ้งๆ */
+/* ปรับปรุงชื่อร้าน: เอาขอบสีชมพูออก เหลือเพียงสีน้ำตาลละมุน */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
     font-size: 60px;
     margin-bottom: -5px; 
     text-align: center;
-    color: var(--main-brown); /* กลับมาใช้สีน้ำตาลละมุน */
-    
-    /* สร้างขอบสีชมพูอ่อนแบบห่างๆ ฟุ้งๆ (Double Glow Effect) */
-    text-shadow: 
-        /* เลเยอร์ขอบขาวชั้นแรกเพื่อให้ชื่อร้านเด่น */
-        0 0 4px #fff, 
-        0 0 4px #fff,
-        /* เลเยอร์ขอบสีชมพูอ่อนแบบห่างๆ และฟุ้ง */
-        0 0 12px var(--accent-pink),
-        0 0 18px var(--accent-pink);
+    color: var(--main-brown);
+    /* เอา text-shadow สีชมพูออกทั้งหมด */
+    text-shadow: none;
 }
 
 .left-tagline {
