@@ -498,8 +498,8 @@ h1.shop-title-right {
 
             <div class="contact-grid">
                 <div class="contact-card-mini" id="lineCard">
-                    <div class="pop-label-mini">Melodyliz</div>
-                    <div class="contact-btn" onclick="toggleContactMini('lineCard')">LINE</div>
+                    <div class="pop-label-mini" id="lineLabel">Melodyliz</div>
+                    <div class="contact-btn" onclick="copyAndToggle('lineCard', 'Melodyliz')">LINE</div>
                 </div>
                 <div class="contact-card-mini" id="fbCard">
                     <div class="pop-img-mini" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
@@ -603,6 +603,30 @@ h1.shop-title-right {
         });
         
         target.classList.toggle('active');
+    }
+
+    // New Function: Copy ID to Clipboard
+    function copyAndToggle(id, text) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(text).then(() => {
+            const label = document.getElementById('lineLabel');
+            const originalText = label.innerText;
+            
+            // Change text to show success
+            label.innerText = "Copied! ✨";
+            label.style.color = "#92736C";
+            
+            // Toggle the card visibility
+            toggleContactMini(id);
+
+            // Revert text after 2 seconds
+            setTimeout(() => {
+                label.innerText = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            toggleContactMini(id);
+        });
     }
 
     initStack();
