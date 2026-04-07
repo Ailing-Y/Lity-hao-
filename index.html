@@ -89,58 +89,25 @@ body {
     padding-top: 10px;
 }
 
-/* --- ส่วนของหัวข้อที่ปรับแต่งใหม่ตามรูปภาพ --- */
-.hanging-title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    margin-bottom: 10px;
-}
-
-.letter-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-/* เส้นเชือกที่ห้อยตัวอักษรลงมา */
-.letter-box::before {
-    content: "";
-    width: 2px;
-    height: 15px;
-    background-color: var(--main-brown);
-    opacity: 0.4;
-    margin-bottom: -2px;
-}
-
-.hanging-letter {
+/* ปรับปรุงชื่อร้าน: ใช้ข้อความเดิม แต่เพิ่มขอบซ้อนหลายชั้นตามภาพตัวอย่าง */
+.shop-title-large {
     font-family: 'Pacifico', cursive;
-    font-size: 55px;
-    color: white;
-    line-height: 1;
-    /* สร้างขอบแบบตามรูปภาพ: ขอบเข้มด้านใน และเงาสีชมพูอ่อนฟุ้งๆ ด้านนอก */
+    font-size: 65px;
+    margin-bottom: 10px; 
+    text-align: center;
+    color: white; /* ตัวอักษรสีขาวเพื่อให้เห็นขอบชัดเจน */
+    
+    /* เทคนิคสร้างขอบหลายชั้น: ขอบน้ำตาลด้านใน + ขอบชมพูอ่อนห่างๆ ด้านนอก */
     text-shadow: 
+        /* เลเยอร์ 1-4: ขอบสีน้ำตาลเข้ม (สร้างขอบเส้นรอบรูป) */
         -2px -2px 0 var(--main-brown),  
          2px -2px 0 var(--main-brown),
         -2px  2px 0 var(--main-brown),
          2px  2px 0 var(--main-brown),
-         0px  4px 0px var(--accent-pink), /* เงาชมพูหนาๆ ด้านล่าง */
-         0px  6px 15px rgba(252, 228, 236, 0.8); /* แสงฟุ้งชมพู */
-}
-
-/* ตัวดาวที่อยู่ในชื่อร้านตามรูป */
-.title-star {
-    font-size: 45px;
-    color: white;
-    margin-right: 5px;
-    text-shadow: 
-        -2px -2px 0 var(--main-brown),  
-         2px -2px 0 var(--main-brown),
-        -2px  2px 0 var(--main-brown),
-         2px  2px 0 var(--main-brown),
-         0px  4px 0px var(--accent-pink);
+        /* เลเยอร์ 5: ขอบสีชมพูอ่อนที่หนาขึ้นและห่างออกมานิดๆ */
+        0px 5px 0px var(--accent-pink),
+        /* เลเยอร์ 6: แสงฟุ้งสีชมพูรอบๆ */
+        0px 0px 15px rgba(252, 228, 236, 1);
 }
 
 .left-tagline {
@@ -149,11 +116,9 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 500;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     opacity: 0.8;
 }
-
-/* ------------------------------------------ */
 
 .deco-stars-hanging {
     width: 100%;
@@ -305,7 +270,7 @@ h1 { color: var(--dark-brown); font-size: 22px; margin-bottom: 5px; font-family:
 @media (max-width: 768px) {
     .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
-    .hanging-letter { font-size: 40px; }
+    .shop-title-large { font-size: 45px; }
 }
 </style>
 </head>
@@ -320,17 +285,7 @@ h1 { color: var(--dark-brown); font-size: 22px; margin-bottom: 5px; font-family:
 
     <div class="main-content">
         <div class="left-column">
-            
-            <div class="hanging-title-container">
-                <span class="title-star">★</span>
-                <div class="letter-box"><span class="hanging-letter">L</span></div>
-                <div class="letter-box"><span class="hanging-letter">i</span></div>
-                <div class="letter-box"><span class="hanging-letter">t</span></div>
-                <div class="letter-box"><span class="hanging-letter">y</span></div>
-                <div class="letter-box"><span class="hanging-letter">h</span></div>
-                <div class="letter-box"><span class="hanging-letter">a</span></div>
-                <div class="letter-box"><span class="hanging-letter">o</span></div>
-            </div>
+            <h1 class="shop-title-large">Lityhao</h1>
             
             <p class="left-tagline">✦ creative & illustration ✦</p>
             
