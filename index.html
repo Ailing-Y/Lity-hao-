@@ -11,7 +11,7 @@
     --main: #92736C;
     --dark: #634a44;
     --white: #FFFFFF;
-    --window-bg: rgba(255, 255, 255, 0.8);
+    --window-bg: rgba(255, 255, 255, 0.6); /* ปรับความโปร่งใสให้เห็นลายพื้นหลังชัดขึ้น */
     --card-shadow: 0 8px 25px rgba(146, 115, 108, 0.08);
 }
 
@@ -19,7 +19,7 @@
 
 body {
     background-color: var(--bg);
-    /* พื้นหลัง Pattern */
+    /* พื้นหลัง Pattern ของหน้าจอหลัก */
     background-image: radial-gradient(#f8d7da 1px, transparent 1px);
     background-size: 20px 20px;
     display: flex;
@@ -29,18 +29,23 @@ body {
     padding: 20px;
 }
 
-/* ปรับกรอบหน้าต่างเป็น 1:1 */
+/* ปรับกรอบหน้าต่างเป็น 1:1 พร้อมใส่พื้นหลังภาพที่ส่งมา */
 .browser-window {
     width: 800px;
-    aspect-ratio: 1 / 1; /* กำหนดสัดส่วน 1:1 */
-    background: var(--window-bg);
-    backdrop-filter: blur(15px);
+    aspect-ratio: 1 / 1;
+    background: 
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), /* Layer สีขาวเพื่อให้ภาพดูอ่อนลง */
+        url('image.png'); /* ใส่ชื่อไฟล์ภาพลายสก็อตที่คุณส่งมาตรงนี้ */
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.9);
     box-shadow: 0 30px 60px rgba(0,0,0,0.08);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .browser-header {
@@ -50,6 +55,7 @@ body {
     align-items: center;
     gap: 15px;
     border-bottom: 1px solid rgba(0,0,0,0.03);
+    z-index: 5;
 }
 .dot { width: 10px; height: 10px; background: #EBCBC4; border-radius: 50%; }
 .address-bar {
@@ -70,6 +76,7 @@ body {
     padding: 30px;
     flex: 1;
     overflow: hidden;
+    z-index: 2;
 }
 
 /* ฝั่งซ้าย: รูปภาพ Collage */
@@ -124,12 +131,11 @@ body {
     padding-right: 5px;
 }
 
-/* ปรับแต่ง Scrollbar */
 .right-column::-webkit-scrollbar { width: 4px; }
 .right-column::-webkit-scrollbar-thumb { background: #EBCBC4; border-radius: 10px; }
 
 .info-card {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95); /* ให้ Card ทึบกว่าพื้นหลังเล็กน้อยเพื่อให้อ่านง่าย */
     border-radius: 20px;
     padding: 20px;
     box-shadow: var(--card-shadow);
@@ -171,11 +177,10 @@ h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
     transition: 0.3s;
 }
 .btn-main { background: var(--main); color: #fff; margin-top: 5px; }
-.btn-outline { border: 1.5px dashed var(--main); color: var(--main); }
+.btn-outline { border: 1.5px dashed var(--main); color: var(--main); background: rgba(255,255,255,0.8); }
 
 .sticker { position: absolute; pointer-events: none; z-index: 10; }
 
-/* Responsive */
 @media (max-width: 768px) {
     .browser-window { width: 95vw; aspect-ratio: auto; min-height: 90vh; }
     .main-content { grid-template-columns: 1fr; overflow-y: auto; }
@@ -235,7 +240,7 @@ h1 { color: var(--dark); font-size: 22px; margin-bottom: 5px; }
                 <a href="#" class="btn btn-outline">Check Queue</a>
             </div>
 
-            <p style="text-align: center; font-size: 10px; color: #ccc; margin-top: 10px;">© 2026 Lityhao Store</p>
+            <p style="text-align: center; font-size: 10px; color: #634a44; margin-top: 10px; font-weight: 500;">© 2026 Lityhao Store</p>
         </div>
     </div>
 </div>
