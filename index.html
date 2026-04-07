@@ -22,7 +22,7 @@
 
 body {
     background-color: var(--bg-light);
-    background-image: radial-gradient(var(--polka-dot) 1.5px, transparent 1.5px);
+    background-image: radial-gradient(var(--polka-dot) 1px, transparent 1px);
     background-size: 25px 25px;
     display: flex;
     justify-content: center;
@@ -108,6 +108,7 @@ body {
     opacity: 0.8;
 }
 
+/* ส่วนตกแต่งดาวห้อย */
 .deco-stars-hanging {
     width: 100%;
     position: relative;
@@ -132,45 +133,45 @@ body {
     border-radius: 1px;
 }
 
-/* ปรับปรุง Star Bubble ให้มีเลเยอร์สีชมพูอ่อนและขอบมน */
+/* ปรับปรุง Star Bubble: เอาพื้นหลังวงกลมออก และสร้างเลเยอร์ดาวซ้อนกัน */
 .star-bubble {
-    color: var(--main-brown);
-    font-size: 24px; 
-    background: rgba(255, 255, 255, 0.8); /* พื้นหลังขาวโปร่งแสง */
-    width: 44px; 
+    color: var(--main-brown); /* สีดาวหลัก */
+    font-size: 32px; /* ขนาดดาวใหญ่ขึ้น */
+    width: 44px; /* กำหนดขนาดพื้นที่เพื่อให้ตำแหน่งคงที่ */
     height: 44px;
-    border-radius: 50%; /* กลมมน */
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
-    /* เงาหลัก */
-    box-shadow: 0 4px 10px rgba(146, 115, 108, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.9);
     margin-top: -5px; 
+    text-shadow: 0 4px 10px rgba(146, 115, 108, 0.1); /* เงาบางๆให้ดาวมีมิติ */
 }
 
-/* สร้างเลเยอร์สีชมพูอ่อนซ้อนด้านหลัง */
+/* สร้างเลเยอร์ดาวสีชมพูอ่อนมนๆซ้อนด้านหลัง */
 .star-bubble::after {
-    content: "";
+    content: "★"; /* ใช้ตัวอักษรดาวตัวเดิม */
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--accent-pink); /* สีชมพูอ่อน */
-    border-radius: 50%;
-    top: 4px; /* เขยิบลงมาหน่อย */
+    color: var(--accent-pink); /* สีชมพูอ่อน */
+    font-size: 36px; /* ดาวหลังใหญ่กว่านิดหน่อย */
+    top: 3px; /* เขยิบลงมาหน่อย */
     left: 4px; /* เขยิบขวาหน่อย */
-    z-index: -1; /* อยู่หลังวงกลมขาว */
-    opacity: 0.7;
-    filter: blur(1px); /* เบลอนิดๆให้ดูนุ่ม */
+    z-index: -1; /* อยู่หลังดาวหลัก */
+    opacity: 0.8;
+    /* ปรับขอบให้ดูมนๆนุ่มๆด้วย blur */
+    filter: blur(1.5px); 
 }
 
 .hanging-star.mid::before { height: 40px; }
 .hanging-star.mid .star-bubble { 
-    font-size: 28px; 
+    font-size: 38px; 
     width: 50px; 
     height: 50px; 
+}
+.hanging-star.mid .star-bubble::after {
+    font-size: 42px;
+    top: 4px;
+    left: 5px;
 }
 
 .image-stack {
