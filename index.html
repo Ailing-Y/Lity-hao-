@@ -10,7 +10,6 @@
 :root {
     --bg-light: #FFFBFB; 
     --main-brown: #92736C;
-    --light-brown: #A88B84; /* สีน้ำตาลที่อ่อนลงสำหรับชื่อร้าน */
     --dark-brown: #634a44;
     --white: #FFFFFF;
     --accent-pink: #FCE4EC;
@@ -35,7 +34,6 @@ body {
 .browser-window {
     width: 800px;
     aspect-ratio: 1 / 1;
-    /* แนะนำให้เตรียมไฟล์ image.png ลายสก็อตที่จางแล้วไว้ด้วยครับ */
     background: 
         linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
         url('image.png'); 
@@ -91,25 +89,22 @@ body {
     padding-top: 10px;
 }
 
-/* ปรับสีชื่อร้านให้อ่อนลงและมีลายทางข้างใน */
+/* ปรับปรุงชื่อร้าน: เอาลายออก, กลับมาใช้สีน้ำตาล, ใส่ขอบชมพูอ่อนแบบห่างๆฟุ้งๆ */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
     font-size: 60px;
     margin-bottom: -5px; 
     text-align: center;
+    color: var(--main-brown); /* กลับมาใช้สีน้ำตาลละมุน */
     
-    /* สร้างลายทางอ่อนๆ ข้างในตัวอักษรให้อ่อนลงกว่าเดิม */
-    background: repeating-linear-gradient(
-        45deg,
-        var(--light-brown),
-        var(--light-brown) 4px,
-        #D6C6C2 4px, /* ปรับสีลายทางให้อ่อนลงและกลืนกันมากขึ้น */
-        #D6C6C2 8px
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-    filter: drop-shadow(2px 2px 0px #fff);
+    /* สร้างขอบสีชมพูอ่อนแบบห่างๆ ฟุ้งๆ (Double Glow Effect) */
+    text-shadow: 
+        /* เลเยอร์ขอบขาวชั้นแรกเพื่อให้ชื่อร้านเด่น */
+        0 0 4px #fff, 
+        0 0 4px #fff,
+        /* เลเยอร์ขอบสีชมพูอ่อนแบบห่างๆ และฟุ้ง */
+        0 0 12px var(--accent-pink),
+        0 0 18px var(--accent-pink);
 }
 
 .left-tagline {
@@ -122,7 +117,6 @@ body {
     opacity: 0.8;
 }
 
-/* ส่วนตกแต่งดาวห้อยปรับเป็นขอบมนและใหญ่ขึ้น */
 .deco-stars-hanging {
     width: 100%;
     position: relative;
@@ -147,11 +141,10 @@ body {
     border-radius: 1px;
 }
 
-/* ปรับปรุง Star Bubble: เอาเลเยอร์ออก และสร้างดาวขอบมนสีชมพูอ่อนขนาดใหญ่ */
 .star-bubble {
-    color: var(--accent-pink); /* สีชมพูอ่อน */
-    font-size: 38px; /* ปรับขนาดดาวให้ใหญ่ขึ้นมาก */
-    width: 50px; /* กำหนดขนาดพื้นที่เพื่อให้ตำแหน่งคงที่ */
+    color: var(--accent-pink);
+    font-size: 38px; 
+    width: 50px; 
     height: 50px;
     display: flex;
     justify-content: center;
@@ -159,19 +152,12 @@ body {
     position: relative;
     z-index: 2;
     margin-top: -5px; 
-    
-    /* เพิ่มเงาบางๆให้ดาวมีมิติและดูขอบมนขึ้น */
     filter: drop-shadow(0 4px 6px rgba(146, 115, 108, 0.08));
-}
-
-/* เอาเลเยอร์ซ้อนกันออก */
-.star-bubble::after {
-    content: none;
 }
 
 .hanging-star.mid::before { height: 40px; }
 .hanging-star.mid .star-bubble { 
-    font-size: 44px; /* ดาวกลางใหญ่กว่าเพื่อน */
+    font-size: 44px; 
     width: 58px; 
     height: 58px; 
 }
