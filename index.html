@@ -10,7 +10,7 @@
 :root {
     --bg-light: #FFFBFB; 
     --main-brown: #92736C;
-    --light-brown: #A88B84; /* สีน้ำตาลที่อ่อนลงสำหรับชื่อร้าน */
+    --light-brown: #B09892; /* ปรับสีพื้นฐานของชื่อร้านให้อ่อนลงเล็กน้อย */
     --dark-brown: #634a44;
     --white: #FFFFFF;
     --accent-pink: #FCE4EC;
@@ -35,6 +35,7 @@ body {
 .browser-window {
     width: 800px;
     aspect-ratio: 1 / 1;
+    /* แนะนำให้เตรียมไฟล์ image.png ลายสก็อตที่จางแล้วไว้ด้วยครับ */
     background: 
         linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
         url('image.png'); 
@@ -42,7 +43,7 @@ body {
     background-position: center;
     backdrop-filter: blur(10px);
     border-radius: 30px;
-    border: 2px solid var(--white);
+    border: 1px solid rgba(255,255,255,0.9);
     box-shadow: 0 30px 60px rgba(0,0,0,0.08);
     overflow: hidden;
     display: flex;
@@ -90,20 +91,20 @@ body {
     padding-top: 10px;
 }
 
-/* ปรับสีชื่อร้านให้อ่อนลงและมีลายทางข้างใน */
+/* ปรับสีชื่อร้านและลายทางข้างในให้อ่อนลง */
 .shop-title-large {
     font-family: 'Pacifico', cursive;
     font-size: 60px;
     margin-bottom: -5px; 
     text-align: center;
     
-    /* สร้างลายทางอ่อนๆ ข้างในตัวอักษร */
+    /* ปรับลายทางอ่อนๆ ข้างในตัวอักษรให้อ่อนลงกว่าเดิม */
     background: repeating-linear-gradient(
         45deg,
         var(--light-brown),
         var(--light-brown) 4px,
-        #BCA59F 4px,
-        #BCA59F 8px
+        #D6C6C2 4px, /* ปรับสีลายทางให้อ่อนลงและกลืนกันมากขึ้น */
+        #D6C6C2 8px
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -121,7 +122,7 @@ body {
     opacity: 0.8;
 }
 
-/* ส่วนตกแต่งดาวห้อยปรับเป็นขอบมน */
+/* ส่วนตกแต่งดาวห้อย */
 .deco-stars-hanging {
     width: 100%;
     position: relative;
@@ -157,26 +158,32 @@ body {
     position: relative;
     z-index: 2;
     margin-top: -5px;
-    /* ปรับให้ดาวดูขอบมนนวลขึ้น */
     filter: drop-shadow(0 2px 3px rgba(146, 115, 108, 0.1));
 }
 
+/* ปรับปรุงให้ดาวชมพูข้างหลังเป็นขอบมนแบบเห็นได้ชัด */
 .star-bubble::after {
-    content: "★";
+    /* ใช้ SVG Star ที่มีขอบมน (Rounded corners) */
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="%23FCE4EC" d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 471.1C465.1 483 460.3 495 450.8 502.1C441.3 509.2 428.3 510.3 417.8 504.7L288 436.5L158.2 504.7C150.7 508.7 141.5 509.5 133.5 506.7C125.4 503.9 119 497.5 116.2 489.5L112.9 481.1C110.9 473.1 111.7 464.7 115.1 457.1L137.5 328.1L33.3 225.9C24.7 217.3 21.6 204.7 25.4 193.1C29.2 181.6 39.2 173.2 51.1 171.5L194.8 150.3L259.1 19.9C264.4 8.2 276.3 0 288 0C299.7 0 311.6 8.2 316.9 19.9L381.2 150.3Z"/></svg>');
     position: absolute;
-    color: var(--accent-pink);
-    font-size: 36px;
-    top: 3px;
-    left: 4px;
+    width: 38px; /* ปรับขนาดให้เหมาะสม */
+    height: 38px;
+    top: 5px; /* ปรับตำแหน่ง */
+    left: 5px;
     z-index: -1;
     opacity: 0.9;
-    /* เบลอขอบดาวชมพูให้ดูมนและฟุ้งๆ */
-    filter: blur(2px);
+    /* ลด blur ลงเพื่อให้เห็นขอบมนชัดเจนขึ้น */
+    filter: blur(0.5px); 
 }
 
 .hanging-star.mid::before { height: 40px; }
 .hanging-star.mid .star-bubble { font-size: 38px; width: 50px; height: 50px; }
-.hanging-star.mid .star-bubble::after { font-size: 42px; top: 4px; left: 5px; }
+.hanging-star.mid .star-bubble::after { 
+    width: 44px;
+    height: 44px;
+    top: 6px; 
+    left: 6px; 
+}
 
 .image-stack {
     position: relative;
