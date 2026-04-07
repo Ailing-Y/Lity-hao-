@@ -241,13 +241,13 @@ body {
     margin-top: 10px;
 }
 
-/* ปรับปรุงพื้นหลัง 2 ช่องด้านล่างเป็นสีชมพูลายจุดน่ารักๆ */
+/* แก้ไขจุดเป็นสีน้ำตาลอ่อนที่นี่ */
 .pink-polka-box {
     background-color: var(--accent-pink);
-    background-image: radial-gradient(var(--polka-dot) 1px, transparent 1px);
+    background-image: radial-gradient(#D7C2BC 1.5px, transparent 1.5px); /* เปลี่ยนเป็นสีน้ำตาลอ่อน */
     background-size: 15px 15px;
     backdrop-filter: blur(2px);
-    border-radius: 20px; /* กรอบมนเล็กๆ */
+    border-radius: 20px; 
     padding: 20px;
     border: 1px solid rgba(146, 115, 108, 0.1);
     font-size: 13px;
@@ -312,7 +312,7 @@ h1.shop-title-right {
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
         <div class="address-bar">lityhao.design/home</div>
-        <div style="font-size: 11px; color: #999; font-weight: 500;">EXIT</div>
+        <div style="font-size: 11px; color: #999; font-weight: 500; cursor: pointer;">EXIT</div>
     </div>
 
     <div class="main-content">
@@ -367,9 +367,9 @@ h1.shop-title-right {
         <div class="bottom-info-section">
             <div class="pink-polka-box">
                 • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ<br>
-                ยกเว้นโทนส์ทีติดกัน เช่น คูนส์แดง โทนสีเขียว<br>
-                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชิดเจนน้า<br>
-                • ระบุขนาดของกระดาษที่ต้องการด้วยนะดับ<br>
+                ยกเว้นโทนที่ติดกัน เช่น คูนสีแดง โทนสีเขียว<br>
+                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชัดเจนน่า<br>
+                • ระบุขนาดของกระดาษที่ต้องการด้วยนะคะ<br>
                 • บรีฟรายละเอียดต่างๆ ได้ตามใจชอบเลยนะคะ
             </div>
             <div class="pink-polka-box">
@@ -420,6 +420,7 @@ h1.shop-title-right {
     function updateClasses() {
         images.forEach((_, index) => {
             const el = document.getElementById(`img-${index}`);
+            if (!el) return;
             if (index === currentIndex) el.className = 'img-box img-pos-1';
             else if (index === (currentIndex + 1) % images.length) el.className = 'img-box img-pos-2';
             else el.className = 'img-box img-hidden';
