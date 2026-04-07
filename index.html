@@ -33,7 +33,7 @@ body {
 
 .browser-window {
     width: 800px;
-    aspect-ratio: 1 / 1; /* กลับมาเป็น 1:1 เหมือนเดิม */
+    aspect-ratio: 1 / 1;
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)); 
     backdrop-filter: blur(10px);
     border-radius: 30px;
@@ -73,10 +73,9 @@ body {
     gap: 20px;
     padding: 30px;
     flex: 1;
-    overflow-y: auto; /* เปิดให้ scroll เฉพาะข้างใน */
+    overflow-y: auto;
 }
 
-/* ตกแต่ง Scrollbar ให้ดูละมุน */
 .main-content::-webkit-scrollbar { width: 6px; }
 .main-content::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
 
@@ -242,15 +241,19 @@ body {
     margin-top: 10px;
 }
 
-.glass-box {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-    border-radius: 25px;
+/* ปรับปรุงพื้นหลัง 2 ช่องด้านล่างเป็นสีชมพูลายจุดน่ารักๆ */
+.pink-polka-box {
+    background-color: var(--accent-pink);
+    background-image: radial-gradient(var(--polka-dot) 1px, transparent 1px);
+    background-size: 15px 15px;
+    backdrop-filter: blur(2px);
+    border-radius: 20px; /* กรอบมนเล็กๆ */
     padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(146, 115, 108, 0.1);
     font-size: 13px;
     color: var(--dark-brown);
     line-height: 1.8;
+    box-shadow: 0 5px 15px rgba(146, 115, 108, 0.03);
 }
 
 h1.shop-title-right {
@@ -281,15 +284,6 @@ h1.shop-title-right {
     font-size: 13px;
     color: var(--dark-brown);
     border-bottom: 1px dashed var(--accent-pink);
-}
-
-.footer-tagline {
-    text-align: center;
-    font-size: 12px;
-    color: var(--main-brown);
-    margin-top: 10px;
-    font-style: italic;
-    line-height: 1.5;
 }
 
 .btn {
@@ -346,8 +340,8 @@ h1.shop-title-right {
                 <h1 class="shop-title-right">Lityhao</h1>
                 <p class="desc">Greetings! welcome to your personal life. มาใช้บริการกันเยอะๆ น้า</p>
                 <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-                    <span style="background: var(--accent-pink); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown);">ARTWORK</span>
-                    <span style="background: var(--accent-pink); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown);">DESIGN</span>
+                    <span style="background: var(--white); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown); border: 1px solid var(--polka-dot);">ARTWORK</span>
+                    <span style="background: var(--white); font-size: 10px; padding: 3px 10px; border-radius: 10px; color: var(--main-brown); border: 1px solid var(--polka-dot);">DESIGN</span>
                 </div>
             </div>
 
@@ -371,14 +365,14 @@ h1.shop-title-right {
         </div>
 
         <div class="bottom-info-section">
-            <div class="glass-box">
+            <div class="pink-polka-box">
                 • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ<br>
                 ยกเว้นโทนส์ทีติดกัน เช่น คูนส์แดง โทนสีเขียว<br>
                 • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชิดเจนน้า<br>
                 • ระบุขนาดของกระดาษที่ต้องการด้วยนะดับ<br>
                 • บรีฟรายละเอียดต่างๆ ได้ตามใจชอบเลยนะคะ
             </div>
-            <div class="glass-box">
+            <div class="pink-polka-box">
                 <strong>รองาน โดยปกติ 1-2 วันนะคะ</strong><br>
                 เว้นแต่จะติดคิวนะคะ<br>
                 หากเกินกำหนดการที่แจ้งไว้<br>
@@ -386,9 +380,8 @@ h1.shop-title-right {
             </div>
         </div>
 
-        <div style="grid-column: 1 / span 2; padding: 20px 0;">
-            <p class="footer-tagline">"สร้างสรรค์ผลงานด้วยความตั้งใจ <br>ให้ภาพวาดเล่าความสุขในแบบของคุณ" ♡</p>
-            <p style="text-align: center; font-size: 10px; color: #634a44; margin-top: 15px; opacity: 0.5;">© 2026 Lityhao Store</p>
+        <div style="grid-column: 1 / span 2; padding: 10px 0 20px 0;">
+            <p style="text-align: center; font-size: 10px; color: #634a44; opacity: 0.5;">© 2026 Lityhao Store</p>
         </div>
     </div>
 </div>
