@@ -18,6 +18,16 @@
     --card-shadow: 0 10px 30px rgba(146, 115, 108, 0.06);
 }
 
+/* --- ส่วนที่เพิ่มเพื่อตรึงหน้าจอ --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* ห้ามเลื่อนหน้าจอหลักเด็ดขาด */
+}
+/* ---------------------------- */
+
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
 
 body {
@@ -32,11 +42,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    /* ตรึงหน้าจอหลักไม่ให้เลื่อนซ้ายขวา */
-    overflow-x: hidden; 
     position: relative;
+    padding: 10px; /* เว้นระยะจากขอบจอเล็กน้อย */
 }
 
 .bg-star {
@@ -58,13 +65,14 @@ body {
 
 .browser-window {
     width: 800px;
-    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    aspect-ratio: 1 / 1; /* บังคับจัตุรัส */
     background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)); 
     backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.9);
     box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-    overflow: hidden;
+    overflow: hidden; /* ล็อคเนื้อหาไม่ให้ทะลุจัตุรัส */
     display: flex;
     flex-direction: column;
     position: relative;
@@ -79,6 +87,7 @@ body {
     gap: 15px;
     border-bottom: 1px solid rgba(0,0,0,0.03);
     z-index: 10;
+    flex-shrink: 0; /* หัว Browser ไม่หดตัว */
 }
 .dot { width: 10px; height: 10px; background: var(--accent-pink); border-radius: 50%; }
 
@@ -99,8 +108,7 @@ body {
     gap: 20px;
     padding: 30px;
     flex: 1;
-    overflow-y: auto;
-    /* ตรึงเนื้อหาภายในไม่ให้ไหลออกข้าง */
+    overflow-y: auto; /* เนื้อหายาวจะเลื่อนได้แค่ในกรอบจัตุรัส */
     overflow-x: hidden; 
 }
 
@@ -461,31 +469,18 @@ h1.shop-title-right {
     margin-top: 5px;
 }
 
-/* ==========================================
-   ส่วนที่ปรับปรุง: ล็อก 1:1 และตรึงไม่ให้เลื่อนซ้ายขวา
-   ========================================== */
-
+/* --- ส่วนแก้ไขพิเศษสำหรับโทรศัพท์ (Lock Screen & 1:1) --- */
 @media (max-width: 768px) {
-    body {
-        padding: 5px; /* ลด Padding เพื่อให้กรอบใหญ่ขึ้น */
-        overflow-x: hidden;
-        align-items: flex-start; /* เริ่มจากด้านบนเพื่อให้เลื่อนลงดูเนื้อหาได้ */
-    }
-    
     .browser-window {
-        width: 100%; 
-        max-width: 100vw;
-        /* บังคับให้เป็น 1:1 ในโทรศัพท์ */
-        aspect-ratio: 1 / 1; 
-        height: auto;
+        width: 95vw; /* กว้างเกือบเต็มจอ */
+        max-height: 95vw; /* ล็อคความสูงเท่าความกว้างเพื่อให้เป็นจัตุรัส */
+        aspect-ratio: 1 / 1;
         border-radius: 20px;
-        margin: 0;
     }
 
     .main-content {
-        grid-template-columns: 1fr; 
-        padding: 15px;
-        overflow-x: hidden; /* ล็อกการเลื่อนแนวนอน */
+        grid-template-columns: 1fr; /* ยุบเนื้อหาเป็นแถวเดียว (แต่เลื่อนขึ้นลงได้ในกรอบ) */
+        padding: 20px;
     }
 
     .shop-title-large {
@@ -497,23 +492,13 @@ h1.shop-title-right {
     }
 
     .img-box {
-        width: 140px;
-        height: 180px;
-        left: 25% !important; /* จัดตำแหน่งกึ่งกลางในกรอบ 1:1 */
+        width: 150px;
+        height: 190px;
+        left: 20% !important; /* ปรับรูปให้อยู่ตรงกลางมากขึ้น */
     }
 
     .bottom-info-section {
         grid-template-columns: 1fr;
-    }
-}
-
-/* ล็อกเข้มงวดสำหรับหน้าจอขนาดเล็กมาก */
-@media (max-width: 400px) {
-    .browser-window {
-        aspect-ratio: 1 / 1;
-    }
-    .img-box {
-        left: 20% !important;
     }
 }
 </style>
@@ -526,7 +511,6 @@ h1.shop-title-right {
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
         <div class="address-bar">lityhao.design/home</div>
-        <div style="font-size: 11px; color: #999; font-weight: 500; cursor: pointer;">EXIT</div>
     </div>
 
     <div class="main-content">
@@ -603,26 +587,17 @@ h1.shop-title-right {
                     <div class="contact-btn" onclick="toggleContactMini('fbCard')">FACEBOOK</div>
                 </div>
             </div>
-
-            <div class="right-deco-area">
-                <div class="hanging-star side"><div class="star-bubble" style="font-size: 24px;">★</div></div>
-                <div class="hanging-star side"><div class="star-bubble" style="font-size: 24px;">★</div></div>
-            </div>
         </div>
 
         <div class="bottom-info-section">
             <div class="pink-polka-box">
-                <div style="text-align: center; margin-bottom: 12px; color: var(--main-brown); font-weight: 600;">Handcrafted with Love ✨🤍</div>
-                • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ<br>
-                ยกเว้นโทนที่ติดกัน เช่น ตูนสีแดง โทนสีเขียว<br>
-                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชัดเจนน้าา<br>
-                • ระบุขนาดของกระดาษที่ต้องการด้วยนะคับ
+                • เลือกตูนและโทนสีได้ตามใจชอบเลยนะคะ ยกเว้นโทนที่ติดกัน เช่น ตูนสีแดง โทนสีเขียว<br>
+                • บรีฟงานแบบที่ต้องการ รายละเอียดให้ชัดเจน<br>
+                • ระบุขนาดของกระดาษที่ต้องการ
             </div>
             <div class="pink-polka-box">
-                <div style="text-align: center; margin-bottom: 12px; color: var(--main-brown); font-weight: 600;">Handcrafted with Love ✨🤍</div>
                 <strong>รองาน โดยปกติ 1-2 วันนะคะ</strong><br>
-                หากเกินกำหนดการที่แจ้งไว้<br>
-                สามารถแจ้งขออัพเดทงานและเร่งได้เลยทุกกรณีนะคะ
+                หากเกินกำหนดการที่แจ้งไว้ สามารถแจ้งขออัพเดทงานและเร่งได้เลยทุกกรณีนะคะ
             </div>
         </div>
 
@@ -693,16 +668,12 @@ h1.shop-title-right {
     function startAutoPlay() { clearInterval(autoPlay); autoPlay = setInterval(nextImage, 3500); }
 
     let startX = 0;
-    let isDragging = false;
     container.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX; clearInterval(autoPlay); });
-    container.addEventListener('touchend', (e) => { handleSwipe(startX, e.changedTouches[0].pageX); startAutoPlay(); });
-    container.addEventListener('mousedown', (e) => { startX = e.pageX; isDragging = true; clearInterval(autoPlay); });
-    window.addEventListener('mouseup', (e) => { if (isDragging) { handleSwipe(startX, e.pageX); isDragging = false; startAutoPlay(); } });
-
-    function handleSwipe(s, e) {
-        let diff = s - e;
+    container.addEventListener('touchend', (e) => { 
+        let diff = startX - e.changedTouches[0].pageX;
         if (Math.abs(diff) > 30) { if (diff > 0) nextImage(); else prevImage(); }
-    }
+        startAutoPlay();
+    });
 
     function toggleContactMini(id) {
         const target = document.getElementById(id);
@@ -717,9 +688,6 @@ h1.shop-title-right {
             toggleContactMini(id);
             card.classList.add('copied');
             setTimeout(() => { card.classList.remove('copied'); }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
-            toggleContactMini(id);
         });
     }
 
