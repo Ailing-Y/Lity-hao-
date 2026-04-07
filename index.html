@@ -22,19 +22,44 @@
 
 body {
     background-color: var(--bg-light);
-    background-image: radial-gradient(var(--polka-dot) 1px, transparent 1px);
-    background-size: 25px 25px;
+    /* พื้นหลังลายเส้นตรงสลับสีน้ำตาลและชมพู */
+    background: repeating-linear-gradient(
+        90deg,
+        var(--accent-pink),
+        var(--accent-pink) 40px,
+        #f5e6e2 40px,
+        #f5e6e2 80px
+    );
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ดาวระยิบระยับพื้นหลัง */
+.bg-star {
+    position: absolute;
+    color: var(--main-brown);
+    font-size: 10px;
+    opacity: 0.3;
+    animation: starRotate 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes starRotate {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(20px, 20px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
 }
 
 .browser-window {
     width: 800px;
     aspect-ratio: 1 / 1;
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)); 
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)); 
     backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.9);
@@ -43,6 +68,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    z-index: 1;
 }
 
 .browser-header {
@@ -329,6 +355,22 @@ body {
     font-weight: 500;
 }
 
+.copy-notice {
+    position: absolute;
+    top: 110%;
+    font-size: 10px;
+    color: var(--main-brown);
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.contact-card-mini.copied .copy-notice {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .pop-img-mini {
     position: absolute;
     bottom: 110%;
@@ -428,6 +470,8 @@ h1.shop-title-right {
 </head>
 <body>
 
+<div id="starContainer"></div>
+
 <div class="browser-window">
     <div class="browser-header">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -498,8 +542,9 @@ h1.shop-title-right {
 
             <div class="contact-grid">
                 <div class="contact-card-mini" id="lineCard">
-                    <div class="pop-label-mini" id="lineLabel">Melodyliz</div>
+                    <div class="pop-label-mini">Melodyliz</div>
                     <div class="contact-btn" onclick="copyAndToggle('lineCard', 'Melodyliz')">LINE</div>
+                    <div class="copy-notice">COPIED</div>
                 </div>
                 <div class="contact-card-mini" id="fbCard">
                     <div class="pop-img-mini" onclick="window.open('https://www.facebook.com/regina.fur.2024?', '_blank')">
@@ -538,6 +583,21 @@ h1.shop-title-right {
 </div>
 
 <script>
+    // สร้างดาวประดับพื้นหลัง
+    function createBgStars() {
+        const container = document.getElementById('starContainer');
+        for (let i = 0; i < 30; i++) {
+            const star = document.createElement('div');
+            star.className = 'bg-star';
+            star.innerText = '★';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            container.appendChild(star);
+        }
+    }
+    createBgStars();
+
     const images = [
         "♡︎_O6_♡︎_20260316133921.jpeg", "♡︎_O6_♡︎_20260316133909.jpeg", "♡︎_O6_♡︎_20260316133900.jpeg", 
         "♡︎_O6_♡︎_20260316133850.jpeg", "♡︎_O6_♡︎_20260316133840.jpeg", "♡︎_O6_♡︎_20260316133830.jpeg", 
@@ -605,23 +665,19 @@ h1.shop-title-right {
         target.classList.toggle('active');
     }
 
-    // New Function: Copy ID to Clipboard
+    // Function: Copy ID and show notice at the bottom
     function copyAndToggle(id, text) {
-        // Copy to clipboard
         navigator.clipboard.writeText(text).then(() => {
-            const label = document.getElementById('lineLabel');
-            const originalText = label.innerText;
+            const card = document.getElementById(id);
             
-            // Change text to show success
-            label.innerText = "Copied! ✨";
-            label.style.color = "#92736C";
-            
-            // Toggle the card visibility
+            // Show pop-label above
             toggleContactMini(id);
-
-            // Revert text after 2 seconds
+            
+            // Show "COPIED" notice below
+            card.classList.add('copied');
+            
             setTimeout(() => {
-                label.innerText = originalText;
+                card.classList.remove('copied');
             }, 2000);
         }).catch(err => {
             console.error('Failed to copy: ', err);
