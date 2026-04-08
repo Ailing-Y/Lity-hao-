@@ -365,7 +365,7 @@ body {
     background-image: radial-gradient(#D7C2BC 1.2px, transparent 1.2px); /* ลายเดียวกับ Contact */
     background-size: 12px 12px;
     border-radius: 0 0 15px 15px;
-    box-shadow: 0 10px 20px rgba(146, 115, 108, 0.1);
+    box-shadow: 0 10px 20px rgba(146, 115, 108, 0.15); /* เพิ่มเงาให้ดูเด่นขึ้น */
     z-index: 3;
 }
 
@@ -385,6 +385,7 @@ body {
     transform-origin: top;
     z-index: 5;
     border-top: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* เพิ่มเงาให้ฝาจดหมาย */
 }
 
 /* ตัวล็อคหัวใจตรงกลาง */
@@ -415,14 +416,14 @@ body {
     transition: transform 0.6s ease-in-out;
     transform: translateY(0);
     z-index: 2;
-    box-shadow: var(--card-shadow);
+    box-shadow: 0 5px 15px rgba(146, 115, 108, 0.1); /* เพิ่มเงาให้การ์ดข้อมูล */
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 1px solid var(--polka-dot);
 }
 
-.envelope-wrapper.open .letter { transform: translateY(-70px); }
+.envelope-wrapper.open .letter { transform: translateY(-110px); } /* เลื่อนขึ้นสูงกว่าเดิมเพื่อให้เห็นข้อมูลชัดเจน */
 
 .letter-content {
     font-size: 14px;
@@ -534,16 +535,14 @@ body {
                 <div class="envelope"></div>
                 <div class="letter">
                     <svg class="heart-decoration" viewBox="0 0 32 32"><path d="M16 28.5L14.1 26.8C7.33 20.66 2.86 16.61 2.86 11.66C2.86 7.63 6.02 4.47 10.05 4.47C12.33 4.47 14.51 5.53 16 7.21C17.49 5.53 19.67 4.47 21.95 4.47C25.98 4.47 29.14 7.63 29.14 11.66C29.14 16.61 24.67 20.66 17.9 26.81L16 28.5Z"/></svg>
-                    <div class="letter-content">เลือกตูนและโทนสีได้ตามใจชอบ<br>บรีฟงานรายละเอียดให้ชัดเจน<br>ระบุขนาดกระดาษด้วยนะคับ ✨</div>
-                </div>
+                    <div class="letter-content">เลือกตูนและโทนสีได้ตามใจชอบ<br>บรีฟงานรายละเอียดให้ชัดเจน<br>ระบุขนาดกระดาษด้วยนะคับ</div> </div>
             </div>
 
             <div class="envelope-wrapper" id="env2">
                 <div class="envelope"></div>
                 <div class="letter">
                     <svg class="heart-decoration" viewBox="0 0 32 32"><path d="M16 28.5L14.1 26.8C7.33 20.66 2.86 16.61 2.86 11.66C2.86 7.63 6.02 4.47 10.05 4.47C12.33 4.47 14.51 5.53 16 7.21C17.49 5.53 19.67 4.47 21.95 4.47C25.98 4.47 29.14 7.63 29.14 11.66C29.14 16.61 24.67 20.66 17.9 26.81L16 28.5Z"/></svg>
-                    <div class="letter-content">รองาน ปกติ 1-2 วันนะคะ<br>หากเกินกำหนดที่แจ้งไว้<br>ทักเร่งได้เลยทุกกรณีนะคะ 🤍</div>
-                </div>
+                    <div class="letter-content">รองาน ปกติ 1-2 วันนะคะ<br>หากเกินกำหนดที่แจ้งไว้<br>ทักเร่งได้เลยทุกกรณีนะคะ</div> </div>
             </div>
         </div>
 
